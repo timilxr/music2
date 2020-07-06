@@ -12,7 +12,7 @@ const port = process.env.PORT || 5001;
 app.use(cors());
 app.use(express.json());
 // ... hosting
-app.use(express.static(path.join(__dirname, "client", "build")))
+app.use(express.static(path.join(__dirname, "music", "build")))
 
 // const uri = process.env.ATLAS_URI;
 const uri = process.env.MONGOLAB_CRIMSON_URI;
@@ -33,7 +33,7 @@ app.use('/categories', categoriesRouter );
 
 // ... hosting
 app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+    res.sendFile(path.join(__dirname, "music", "build", "index.html"));
 });
 
 app.listen(port, ()=>{
