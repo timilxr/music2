@@ -41,43 +41,45 @@ export default class Home extends Component{
         return(
             <div>
                 <h3>Saved Posts</h3>
-                <div class="container">
-                    <div class="row justify-content-center mt-3">
-                        <form action="/action_page.php" class="row justify-content-center">
+                <div className="container">
+                    <div className="row justify-content-center mt-3">
+                        <form action="/action_page.php" className="row justify-content-center">
                         <h2>blog search</h2>
-                        <input class="form-control f" type="text" placeholder="Search" /><br />
-                        <input class="btn f" type="submit" value="Search" />
+                        <input className="form-control f" type="text" placeholder="Search" /><br />
+                        <input className="btn f" type="submit" value="Search" />
                         </form>
                     </div>
-                    <div class="d-flex flew-wrap row mt-3 p-5">
+                    <div className="d-flex flew-wrap row mt-3 p-5">
                         { this.state.posts.map(currentpost => {
                             const image = currentpost.post_image;
                            
                             var id = 'make' +currentpost.post_id 
                             id  = require(`../images/${image}`);
-            return <div className="border mx-lg-3 g" width="45">
+            return (<div className="col-6 p-4" key={currentpost.post_id}>
                     <a href="post.php?p_id=<?php echo $post_id?>">
                       
                         {/* <div class="col-lg-6 col-md-6 col-6"> */}
                           {/* <div class="row justify-content-center"> */}
-                            <img width='' height='' className='img-responsive img-fluid' src={id} />
+                            <img width='' height='' className='img-responsive img-fluid img-thumbnail' src={id} />
                           {/* </div> */}
                         {/* </div>
                         <div className="col-lg-6 col-md-6 col-6 text-center"> */}
-                          <h1 className="text-center">
+                          <h3 className="text-center text-capitalize pt-2">
                             {currentpost.post_title}
-                          </h1>
-                          <h4 className="text-center">
+                          </h3>
+                          <h6 className="text-center pt-2">
                             By {currentpost.post_author}
-                          </h4>
-                          <p className='glyphicon glyphicon-time text-center'>
+                          </h6>
+                          <p className='glyphicon glyphicon-time text-center pt-2'>
                             on <br/>
                             {currentpost.post_date}
                           </p>
+                          <Link to='/' className='nav-link text-danger text-center'><Button variant="outline-danger">Read Post</Button>{' '}</Link>
+                            
                         {/* </div> */}
                       
                     </a>
-                </div>
+                </div>)
         }) }
         </div>
         </div>

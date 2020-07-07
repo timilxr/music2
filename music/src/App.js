@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+// import {Redirect} from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -11,8 +12,9 @@ function App() {
   return (
     <Router>
     <div className='container-fluid'>
+    {/* <Redirect to="/home" /> */}
       <Route path='/admin' component={Login} />
-      <Route path='/' component={Home} />
+      <Route path='/home' component={Home} />
     {/* <Login /> */}
       {/* <Route path={`/admin/add_post`} component={AddPost} /> */}
     </div>

@@ -138,14 +138,14 @@ export default class AddPost extends Component{
 
     render(){
         return(
-            <form encType="multipart/form-data" onSubmit={this.onSubmit}>
+            <form encType="multipart/form-data" onSubmit={this.onSubmit} className="px-5">
                 <div className="form-group">
-                    <label htmlFor="title">Post title</label>
+                    <label htmlFor="title"><h5>Post title</h5></label>
                     <input type="text" required className="form-control" value={this.state.post_title} onChange={this.onChangeTitle} name="post_title" />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="post_category">Post category</label>
-                    <select name="post_category" id="" required value={this.state.post_category} onChange={this.onChangeCategory}>
+                    <label htmlFor="post_category"><h5>Post category</h5></label>
+                    <select className="form-control" name="post_category" id="" required value={this.state.post_category} onChange={this.onChangeCategory}>
                     {
                                 this.state.post_categories.map(function(cat){
                                     return <option key={cat}
@@ -156,15 +156,15 @@ export default class AddPost extends Component{
                     </select>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="title">Post Author</label>
+                    <label htmlFor="title"><h5>Post Author</h5></label>
                     <input type="text" className="form-control" name="post_author" required value={this.state.post_author} onChange={this.onChangeAuthor} />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="title">Post status</label>
+                    <label htmlFor="title"><h5>Post status</h5></label>
                     <input type="text" className="form-control" name="post_status" required value={this.state.post_status} onChange={this.onChangeStatus}/>
                 </div>
                 <div className="form-group custom-file">
-                    <label htmlFor="post_image">Post image</label>
+                    <label htmlFor="post_image"><h5>Post image</h5></label>
                     <input type="file" name="post_image" className="form-control-file" required onChange={this.onChangeImage} />
                 </div>
                 {/* <div className="form-group custom-file mb-3">
@@ -172,12 +172,12 @@ export default class AddPost extends Component{
                     <input type="file" className="form-control-file" name="post_file" required onChange={this.onChangeFile}/>
                 </div> */}
                 <div className="form-group">
-                    <label htmlFor="title">Post content</label>
+                    <label htmlFor="title"><h5>Post content</h5></label>
                     <textarea name="post_content" className="form-control" id="" cols="30" rows="10" required value={this.state.post_content} onChange={this.onChangeContent}>
                     </textarea>
                 </div>
                 <div className='form-group'>
-                        <label>Post Date: </label>
+                        <label><h5>Post Date: </h5></label>
                         <div>
                             <DatePicker
                             selected={this.state.post_date}
@@ -186,7 +186,7 @@ export default class AddPost extends Component{
                         </div>
                     </div>
                 <div className="form-group">
-                    <button className="btn btn-primary" type='submit' onClick={this.onPost} >Post</button>
+                    <button className="btn btn-primary text-center" type='submit' onClick={this.onPost} ><h5>Post</h5></button>
                 </div>
             </form>
         )

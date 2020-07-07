@@ -12,6 +12,7 @@ import ViewPost from './view_post';
 import ViewUser from './view_users';
 import EditPost from './Edit_posts';
 import AddCategory from './add_category';
+import {Redirect} from 'react-router-dom';
 
 export default class Header extends Component{
     constructor(props){
@@ -20,20 +21,31 @@ export default class Header extends Component{
         // console.log(props.path);
         this.state={
             link: props.link,
-            path: props.path
+            path: props.path,
+            redirect: false
         }
     }
 
+    renderRedirect = () => {
+        if(this.state.redirect){
+         return (
+           <Redirect
+             to="/admin/dashboard"
+           />
+          );
+        }
+      };
+
     componentDidMount(){
         this.setState({
-
+            redirect: true
         });
     }
 
     render(){
         
         return(
-            <div>
+            <div className="bg-info">
                 <Navbar collapseOnSelect bg="dark" variant="dark" expand="md">
                     <Link to='/' className='nav-link'><Navbar.Brand>BLOG</Navbar.Brand></Link>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -65,7 +77,8 @@ export default class Header extends Component{
                             <div className="col-lg-10 col-md-9 col-12">
                             <div className="justify-content-center"></div>
                             {/* <Router> */}
-                                <Route path='/admin/Dashboard' component={Dashboard} />
+                            { this.renderRedirect() }
+                                <Route path='/admin/dashboard' component={Dashboard} />
                                 <Route path='/admin/add_post' component={AddPost} />
                                 <Route path='/admin/view_posts' component={ViewPost} />
                                 <Route path='/admin/users' component={ViewUser} />

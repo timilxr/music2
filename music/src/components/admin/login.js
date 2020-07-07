@@ -229,53 +229,63 @@ export default class Login extends Component {
         }
         if (!token){
             return(
-            <div>
-                <form onSubmit={this.onSubmit}>
-                <p>Sign In</p>
-                {/* {(signInError) ? (<p>{signInError}</p>) : (null)} */}
-                    <div className='form-group'>
-                        <input type='email' placeholder='Email.Gmail.com' required className='form-control'
-                        value={signInEmail} onChange={this.onSignInChangeEmail}
-                        />
+                <div className="bg-info bg-cover">
+                    <div className="bg-dark elevation-5 p-3 mb-3">
+                        <h2 className="text-center text-info">Hello, Welcome to Our Blog!</h2>
                     </div>
-                    <div className='form-group'>
-                        <input type='password' placeholder='Password' required className='form-control'
-                        value={signInPassword} onChange={this.onSignInChangePassword}
-                        />
+                    <div className="row mt-5 mt-md-3 mt-lg-5">
+                        <div className="col-md-6 p-4 px-md-5 m-auto">
+                            <form onSubmit={this.onSubmit} className="py-5 px-4 px-md-5 bg-dark text-info rounded">
+                            <h4 className="text-center mb-3"><b>Sign In</b></h4>
+                            {/* {(signInError) ? (<p>{signInError}</p>) : (null)} */}
+                                <div className='form-group'>
+                                    <input type='email' placeholder='Email.Gmail.com' required className='form-control bg-transparent text-info'
+                                    value={signInEmail} onChange={this.onSignInChangeEmail}
+                                    />
+                                </div>
+                                <div className='form-group'>
+                                    <input type='password' placeholder='Password' required className='form-control bg-transparent text-info'
+                                    value={signInPassword} onChange={this.onSignInChangePassword}
+                                    />
+                                </div>
+                                <div className='form-group'>
+                                    <input type='submit' value='Sign In' className='btn btn-info btn-block' onClick={this.onSignIn} />
+                                </div>
+                            </form>
+                            <br />
+                        </div>
+                        {/* <div className="col-md-2">&nbsp;</div> */}
+                        <div className="col-md-6 p-4 p-md-5">
+                            <form onSubmit={this.onSubmit} className="py-3 px-4 px-md-5 bg-dark text-info rounded">
+                            <h4 className="mb-3 text-center"><b>Sign Up</b></h4>
+                            {(signUpError) ? (<p>{signUpError}</p>) : (null)}
+                            <div className='form-group'>
+                                    <input type='text' placeholder='First name' required className='form-control bg-transparent text-info'
+                                    value={signUpFirstname} onChange={this.onSignUpChangeFirstname}
+                                    />
+                                </div>
+                                <div className='form-group'>
+                                    <input type='text' placeholder='Last name' required className='form-control bg-transparent text-info'
+                                    value={signUpLastname} onChange={this.onSignUpChangeLastname}
+                                    />
+                                </div>
+                                <div className='form-group'>
+                                    <input type='email' placeholder='Email.Gmail.com' required className='form-control bg-transparent text-info'
+                                    value={signUpEmail} onChange={this.onSignUpChangeEmail}
+                                    />
+                                </div>
+                                <div className='form-group'>
+                                    <input type='password' placeholder='Password' required className='form-control bg-transparent text-info'
+                                    value={signUpPassword} onChange={this.onSignUpChangePassword}
+                                    />
+                                </div>
+                                <div className='form-group'>
+                                    <input type='submit' value='Sign Up' onClick={this.onSignUp} className='btn btn-info btn-block' />
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                    <div className='form-group'>
-                        <input type='submit' value='Log In' className='btn btn-primary' onClick={this.onSignIn} />
-                    </div>
-                </form>
-                <br />
-                <form onSubmit={this.onSubmit}>
-                <p>Sign Up</p>
-                {(signUpError) ? (<p>{signUpError}</p>) : (null)}
-                <div className='form-group'>
-                        <input type='text' placeholder='First name' required className='form-control'
-                        value={signUpFirstname} onChange={this.onSignUpChangeFirstname}
-                        />
-                    </div>
-                    <div className='form-group'>
-                        <input type='text' placeholder='Last name' required className='form-control'
-                        value={signUpLastname} onChange={this.onSignUpChangeLastname}
-                        />
-                    </div>
-                    <div className='form-group'>
-                        <input type='email' placeholder='Email.Gmail.com' required className='form-control'
-                        value={signUpEmail} onChange={this.onSignUpChangeEmail}
-                        />
-                    </div>
-                    <div className='form-group'>
-                        <input type='password' placeholder='Password' required className='form-control'
-                        value={signUpPassword} onChange={this.onSignUpChangePassword}
-                        />
-                    </div>
-                    <div className='form-group'>
-                        <input type='submit' value='Log In' onClick={this.onSignUp} className='btn btn-primary' />
-                    </div>
-                </form>
-            </div>
+                </div>
             );
         }
         return(
