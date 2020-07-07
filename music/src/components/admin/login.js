@@ -237,7 +237,7 @@ export default class Login extends Component {
                         <div className="col-md-6 p-4 px-md-5 m-auto">
                             <form onSubmit={this.onSubmit} className="py-5 px-4 px-md-5 bg-dark text-info rounded">
                             <h4 className="text-center mb-3"><b>Sign In</b></h4>
-                            {/* {(signInError) ? (<p>{signInError}</p>) : (null)} */}
+                            {(signInError) ? (<p>{signInError}</p>) : (null)}
                                 <div className='form-group'>
                                     <input type='email' placeholder='Email.Gmail.com' required className='form-control bg-transparent text-info'
                                     value={signInEmail} onChange={this.onSignInChangeEmail}

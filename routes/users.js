@@ -61,11 +61,11 @@ router.route('/signin').post((req, res, next)=>{
     .then(users=>{
         // console.log(users.length);
         if(users.length !== 1){
-            res.json('Invalid user');
+            res.json({success: false, message: 'Invalid User'});
         }
         const user = users[0];
         if(!user.validPassword(pass)){
-            res.json('Invalid password');
+            res.json({success: false, message: 'Invalid Password'});
         }
         UserSession.find({'userId': user._id})
         .then(sessions=>{
