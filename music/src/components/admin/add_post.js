@@ -186,7 +186,7 @@ export default class AddPost extends Component{
                         </div>
                     </div>
                 <div className="form-group">
-                    <button className="btn btn-primary text-center" type='submit' onClick={this.onPost} ><h5>Post</h5></button>
+                    <button className="btn btn-primary text-center mx-auto" type='submit' onClick={this.onPost} ><h5>Post</h5></button>
                 </div>
             </form>
         )
