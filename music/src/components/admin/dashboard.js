@@ -81,7 +81,7 @@ export default class Dashboard extends Component{
                                     </div>
                                 </div>
                             </div>
-                            <Link to="/admin/view_posts">
+                            <Link to="/admin/users">
                                 <div className="card-footer">
                                     <Card.Text><span className="pull-left text-black-50"><b>View Details</b></span></Card.Text>
                                     <span className="pull-right"><i className="fa fa-circle-right"></i></span>
