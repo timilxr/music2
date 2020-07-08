@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "music", "build")))
 
 // const uri = process.env.ATLAS_URI;
-const uri = process.env.MONGOLAB_CRIMSON_URI;
+const uri = process.env.MONGODB_URI;
 mongoose.connect(uri,{useNewUrlParser:true, useCreateIndex: true, useUnifiedTopology:true});
 
 const connection = mongoose.connection;
