@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Redirect} from 'react-router-dom';
 // import {BrowserRouter as Router, Route} from 'react-router-dom';
 import axios from 'axios';
 import { getFromStorage, setInStorage } from '../../utils/storage';
@@ -22,7 +23,9 @@ export default class Login extends Component {
             signUpFirstname: '',
             signUpLastname: '',
             signUpEmail: '',
-            signUpPassword: ''
+            signUpPassword: '',
+            redirect: false,
+            name: ""
         };
 
         this.onSignInChangeEmail = this.onSignInChangeEmail.bind(this);
@@ -47,10 +50,11 @@ export default class Login extends Component {
             axios.get('http://localhost:5001/users/verify/'+ token)
             .then(res=>{
                 // console.log(res.data.message);
-                if (res.data.message !== 'deleted') {
+                if (res.data.message === 'not deleted') {
                     this.setState({
                         token: token,
-                        isLoading: false
+                        isLoading: false,
+                        name: res.data.user
                     });
                 }
                 this.setState({
@@ -71,6 +75,15 @@ export default class Login extends Component {
             });
         }
     }
+    renderRedirect = () => {
+        if(this.state.redirect){
+         return (
+           <Redirect
+             to="/admin"
+           />
+          );
+        }
+      };
 
     onSignInChangeEmail(e){
         this.setState({
@@ -125,8 +138,11 @@ export default class Login extends Component {
                     signInError: res.data.message,
                     isLoading: false,
                     signInPassword: '',
-                    signInEmail: ''
+                    signInEmail: '',
+                    name: res.data.user
+                    // redirect: true
                 });
+                alert(this.state.signInError);
                 this.componentDidMount();
             })
             .catch(err => {
@@ -217,12 +233,14 @@ export default class Login extends Component {
                 signInEmail,
                 token,
                 signInPassword,
-                signInError,
+                // signInError,
                 signUpError,
                 signUpFirstname,
                 signUpLastname,
                 signUpEmail,
-                signUpPassword
+                signUpPassword,
+                name
+                // redirect
              } = this.state;
         if (isLoading){
             return(<div><p>Loading...</p></div>);
@@ -237,7 +255,7 @@ export default class Login extends Component {
                         <div className="col-md-6 p-4 px-md-5 m-auto">
                             <form onSubmit={this.onSubmit} className="py-5 px-4 px-md-5 bg-dark text-info rounded">
                             <h4 className="text-center mb-3"><b>Sign In</b></h4>
-                            {(signInError) ? (<p>{signInError}</p>) : (null)}
+                            {/* {(signInError) ? (<p>{signInError}</p>) : (null)} */}
                                 <div className='form-group'>
                                     <input type='email' placeholder='Email.Gmail.com' required className='form-control bg-transparent text-info'
                                     value={signInEmail} onChange={this.onSignInChangeEmail}
@@ -290,7 +308,10 @@ export default class Login extends Component {
         }
         return(
             // <Dashboard />
-            <Header  logout={this.logout} link={link} path={path} />
+            <Header  logout={this.logout} user={name} link={link} path={path} />
+            //  <div>
+            //     { this.renderRedirect() }
+            //  </div>
             // {/* <Footer /> */}
             
         )

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import { Nav, Navbar} from 'react-bootstrap';
 
@@ -67,23 +67,26 @@ export default class Header extends Component{
                     
                     <div className="container-fluid">
                         <div className="row justify-content-center">
-                            <h2>WELCOME TO ADMIN</h2><br/>
-                            <h5>Timi</h5>
+                            <h2>WELCOME TO ADMIN</h2><br />
+                            <h5 className="text-capitalize">{this.props.user}</h5>
                         </div>
                         <div className="row">
                             <div className="col-lg-2 col-md-3 col-12">
-                            <Sidenav/>
+                            <Sidenav logout={this.props.logout}/>
                             </div>
                             <div className="col-lg-10 col-md-9 col-12">
                             <div className="justify-content-center"></div>
                             {/* <Router> */}
-                            { this.renderRedirect() }
+                            {/* { this.renderRedirect() } */}
+                            <Switch>
+                            <Route exact path='/admin' component={Dashboard} />
                                 <Route path='/admin/dashboard' component={Dashboard} />
                                 <Route path='/admin/add_post' component={AddPost} />
                                 <Route path='/admin/view_posts' component={ViewPost} />
                                 <Route path='/admin/users' component={ViewUser} />
                                 <Route path='/admin/Edit_post/:id' component={EditPost} />
                                 <Route path='/admin/categories' component={AddCategory} />
+                            </Switch>
                             {/* </Router> */}
 
 
@@ -92,7 +95,7 @@ export default class Header extends Component{
                             </div>
                         </div>
                     </div>
-                    <div className="bg-dark sticky-bottom">
+                    {/* <div className="bg-dark sticky-bottom">
                         <hr />
                         <div className="row justify-content-center">
                         <div className='footer text-center my-5 text-white'>
@@ -103,7 +106,7 @@ export default class Header extends Component{
                         </div>
                     </div>
             
-                </div>
+                </div> */}
             </div>
         )
     }

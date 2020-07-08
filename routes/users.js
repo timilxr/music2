@@ -76,7 +76,7 @@ router.route('/signin').post((req, res, next)=>{
                 userSession.userId = user._id;
                 console.log(userSession);
                 userSession.save()
-                .then(()=>{res.json({success: true, message: 'Valid sign in2', token: user._id});console.log(userSession.userId);})
+                .then(()=>{res.json({success: true, message: 'Valid sign in2', token: user._id, user: user.firstname+" "+user.lastname});console.log(userSession.userId);})
                 .catch((err)=>{res.status(400).json('Error: '+ err);console.log(err);})
             } else {
                 const session = sessions[0];
@@ -85,7 +85,7 @@ router.route('/signin').post((req, res, next)=>{
                 console.log(session.userId);
                 // console.log('this might');
                 session.save()
-                    .then(()=>{res.json({success: true, message: 'Valid sign in', token: user._id});})
+                    .then(()=>{res.json({success: true, message: 'Valid sign in', token: user._id, user: user.firstname+" "+user.lastname});})
                     .catch((err)=>{res.status(400).json('Error: '+ err);console.log(err);})
             }
             
@@ -97,17 +97,23 @@ router.route('/signin').post((req, res, next)=>{
 
 router.route('/verify/:token').get((req, res)=>{
     console.log(req.params.token);
-    UserSession.find({userId: req.params.token, isDeleted: true})
+    UserSession.find({userId: req.params.token, isDeleted: false})
     .then(users=>{
         console.log(users.length);
         if(users.length !== 1){
             res.json('Invalid user');
         } else {
+            User.find({_id: req.params.token})
+            .then(persons=>{
+                const person = persons[0];
             const user = users[0];
-            res.json({success: true,message: 'deleted', token: user.token});
+            res.json({success: true, message: 'not deleted', token: user.token, user: person.firstname+" "+person.lastname});
+        })
+        .catch(err => res.status(400).json('Error: '+ err))
         }
     })
     .catch(err => res.status(400).json('Error: '+ err))
+    // {success: true, message: err, token: user.token}
 });
 
 //logout

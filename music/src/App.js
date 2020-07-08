@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 // import {Redirect} from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -10,13 +10,27 @@ import Home from './components/home';
 
 function App() {
   return (
-    <Router>
+    <Router className="container-fluid">
     <div className='container-fluid'>
     {/* <Redirect to="/home" /> */}
+    <Switch>
       <Route path='/admin' component={Login} />
-      <Route path='/home' component={Home} />
+      <Route exact path='/' component={Home} />
+    </Switch>
     {/* <Login /> */}
       {/* <Route path={`/admin/add_post`} component={AddPost} /> */}
+      <div className="bg-dark sticky-bottom container-fluid">
+                        <hr />
+                        <div className="row justify-content-center">
+                        <div className='footer text-center my-5 text-white'>
+                        123 Fifth Avenue, NY 10160, New York, USA  |  Phone: 800-123-456  |  Email: contact@example.com
+                        <br />
+                        <br />
+                        Copyright © {new Date().getFullYear()} Throne of Gamers
+                        </div>
+                    </div>
+            
+                </div>
     </div>
     </Router>
   );
