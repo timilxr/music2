@@ -87,6 +87,14 @@ router.route('/:id').get((req, res)=>{
     .catch(err => res.status(400).json('Error: '+ err))
 });
 
+router.route('/category/:category').get((req, res)=>{
+    Post.find({post_category: req.param.category})
+    .then(user=>{
+        res.json(user);
+    })
+    .catch(err => res.status(400).json('Error: '+ err))
+});
+
 router.route('/:id').delete((req, res)=>{
     Post.findByIdAndDelete(req.params.id)
     .then(()=>res.json('Post deleted successfully'))

@@ -6,6 +6,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Login from './components/admin/login';
 import Home from './components/home';
+import Post from './components/post';
+import Category from './components/category';
 // import AddPost from './components/add_post';
 
 function App() {
@@ -16,6 +18,8 @@ function App() {
     <Switch>
       <Route path='/admin' component={Login} />
       <Route exact path='/' component={Home} />
+      <Route exact path='/post/:topicId' component={Post} />
+      <Route exact path='/category/:catId' component={Category} />
     </Switch>
     {/* <Login /> */}
       {/* <Route path={`/admin/add_post`} component={AddPost} /> */}

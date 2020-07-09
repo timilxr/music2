@@ -4,7 +4,7 @@ import { Link} from 'react-router-dom';
 // import { Button } from 'react-bootstrap';
 
 
-export default class Home extends Component{
+export default class Category extends Component{
     constructor(props){
         super(props);
         // let mat = path;
@@ -16,11 +16,14 @@ export default class Home extends Component{
     }
 
     componentDidMount(){
-        axios.get('http://localhost:5001/posts/')
+        axios.get('http://localhost:5001/posts/category/'+ this.props.match.params.catId)
         .then(response => {
+            // const Fpic = require(`../images/${response.data.post_image}`);
             this.setState({
                 posts: response.data
             });
+            console.log(this.state.posts);
+            // alert("timi");
             // alert(response.data);
         })
         .catch((error) => console.log(error));
