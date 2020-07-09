@@ -30,7 +30,7 @@ export default class ViewUser extends Component{
     }
 
     componentDidMount(){
-        axios.get('http://localhost:5001/users/')
+        axios.get('/users/')
         .then(response => {
             this.setState({
                 posts: response.data
@@ -41,7 +41,7 @@ export default class ViewUser extends Component{
     }
 
     deleteUser(id){
-        axios.delete('http://localhost:5001/users/'+id)
+        axios.delete('/users/'+id)
         .then(res => console.log(res.data));
             this.setState({
                 posts: this.state.posts.filter(el => el._id !== id)

@@ -18,21 +18,21 @@ export default class Dashboard extends Component{
         }
     }
     componentDidMount(){
-        axios.get('http://localhost:5001/posts/')
+        axios.get('/posts/')
         .then(response =>{
             this.setState({
                 posts: response.data.length
             });
         })
         .catch((error)=> console.log(error));
-        axios.get('http://localhost:5001/users/')
+        axios.get('/users/')
         .then(response =>{
             this.setState({
                 users: response.data.length
             });
         })
         .catch((error)=> console.log(error));
-        axios.get('http://localhost:5001/categories/')
+        axios.get('/categories/')
         .then(response =>{
             this.setState({
                 categories: response.data.length

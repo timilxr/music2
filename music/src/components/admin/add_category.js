@@ -18,7 +18,7 @@ export default class AddCategory extends Component{
         }
     }
     componentDidMount(){
-        axios.get('http://localhost:5001/categories/')
+        axios.get('/categories/')
         .then(response => {
             if (response.data.length > 0){
                 this.setState({
@@ -42,7 +42,7 @@ export default class AddCategory extends Component{
     }
 
     deletePost(id){
-        axios.delete('http://localhost:5001/categories/'+id)
+        axios.delete('/categories/'+id)
         .then(res => {console.log(res.data)
             this.setState({
                 post_categories: this.state.post_categories.filter(el => el._id !== id)
@@ -59,9 +59,9 @@ export default class AddCategory extends Component{
         console.log(category);
         
         
-        axios.post('http://localhost:5001/categories/add', category)
+        axios.post('/categories/add', category)
         .then(res => {console.log(res.data);alert(res.data);
-            axios.get('http://localhost:5001/categories/')
+            axios.get('/categories/')
             .then(response => {
                 if (response.data.length > 0){
                     this.setState({

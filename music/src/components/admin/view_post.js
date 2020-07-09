@@ -30,7 +30,7 @@ export default class ViewPost extends Component{
     }
 
     componentDidMount(){
-        axios.get('http://localhost:5001/posts/')
+        axios.get('/posts/')
         .then(response => {
             this.setState({
                 posts: response.data
@@ -41,7 +41,7 @@ export default class ViewPost extends Component{
     }
 
     deletePost(id){
-        axios.delete('http://localhost:5001/posts/'+id)
+        axios.delete('/posts/'+id)
         .then(res => alert(res.data));
             this.setState({
                 posts: this.state.posts.filter(el => el._id !== id)

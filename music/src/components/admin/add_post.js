@@ -32,7 +32,7 @@ export default class AddPost extends Component{
         }
     }
     componentDidMount(){
-        axios.get('http://localhost:5001/categories/')
+        axios.get('/categories/')
         .then(response => {
             if (response.data.length > 0){
                 this.setState({
@@ -129,7 +129,7 @@ export default class AddPost extends Component{
         formdata.append('image', this.state.post_image);
         console.log(formdata);
         
-        axios.post('http://localhost:5001/posts/add', formdata, config)
+        axios.post('/posts/add', formdata, config)
         .then(res => {console.log(res.data);alert("The file is successfully uploaded");})
         .catch(err => alert('err: ' + err));
 

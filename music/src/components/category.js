@@ -16,7 +16,7 @@ export default class Category extends Component{
     }
 
     componentDidMount(){
-        axios.get('http://localhost:5001/posts/category/'+ this.props.match.params.catId)
+        axios.get('/posts/category/'+ this.props.match.params.catId)
         .then(response => {
             // const Fpic = require(`../images/${response.data.post_image}`);
             this.setState({
@@ -28,7 +28,7 @@ export default class Category extends Component{
         })
         .catch((error) => console.log(error));
 
-        axios.get('http://localhost:5001/categories/')
+        axios.get('/categories/')
         .then(response => {
             this.setState({
                 categories: response.data
@@ -39,7 +39,7 @@ export default class Category extends Component{
     }
 
     deletePost(id){
-        axios.delete('http://localhost:5001/posts/'+id)
+        axios.delete('/posts/'+id)
         .then(res => console.log(res.data));
             this.setState({
                 posts: this.state.posts.filter(el => el._id !== id)

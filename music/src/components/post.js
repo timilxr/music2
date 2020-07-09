@@ -23,7 +23,7 @@ pic: '' };
     }
 
     componentDidMount(){
-        axios.get('http://localhost:5001/posts/'+ this.props.match.params.topicId)
+        axios.get('/posts/'+ this.props.match.params.topicId)
         .then(response => {
             const Fpic = require(`../images/${response.data.post_image}`);
             this.setState({

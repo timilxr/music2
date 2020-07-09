@@ -34,7 +34,7 @@ export default class EditPost extends Component{
         // const pic = require(`../images/${this.state.post_image}`);
     }
     componentDidMount(){
-        axios.get('http://localhost:5001/posts/'+this.props.match.params.id)
+        axios.get('/posts/'+this.props.match.params.id)
         .then(res => {
         const jack = require(`../../images/${res.data.post_image}`);
             this.setState({
@@ -48,7 +48,7 @@ export default class EditPost extends Component{
                 post_date: new Date(res.data.post_date),
                 pic: jack
             });
-            axios.get('http://localhost:5001/categories/')
+            axios.get('/categories/')
             .then(response => {
                 if (response.data.length > 0){
                     this.setState({
@@ -150,7 +150,7 @@ export default class EditPost extends Component{
         formdata.append('image', this.state.post_image);
         console.log(formdata);
         
-        axios.post('http://localhost:5001/posts/update/'+this.props.match.params.id, formdata)
+        axios.post('/posts/update/'+this.props.match.params.id, formdata)
         .then(res => {console.log(res.data);alert("The file is successfully updated");window.location = '/admin/view_posts';})
         .catch(err => alert('err: ' + err));
 
