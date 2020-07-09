@@ -47,7 +47,7 @@ export default class Login extends Component {
         if(obj && obj.token){
             const {token} = obj;
             console.log(token);
-            axios.get('/api/users/verify/'+ token)
+            axios.get('/users/verify/'+ token)
             .then(res=>{
                 // console.log(res.data.message);
                 if (res.data.message === 'not deleted') {
@@ -127,7 +127,7 @@ export default class Login extends Component {
             signInPassword
          } = this.state;
 
-         axios.post('/api/users/signin',{
+         axios.post('/users/signin',{
              email: signInEmail,
              password: signInPassword
          })
@@ -164,7 +164,7 @@ export default class Login extends Component {
         if(obj && obj.token){
             const {token} = obj;
             console.log(token);
-            axios.get('/api/users/logout/'+ token)
+            axios.get('/users/logout/'+ token)
             .then(res=>{
                 console.log(res.data);
                 if (res.data === 'session is deleted') {
@@ -203,7 +203,7 @@ export default class Login extends Component {
             signUpPassword
          } = this.state;
 
-         axios.post('/api/users/add',{
+         axios.post('/users/add',{
              firstname: signUpFirstname,
              lastname: signUpLastname,
              email: signUpEmail,
