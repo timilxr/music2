@@ -38,12 +38,17 @@ export default class Category extends Component{
         .catch((error) => console.log(error));
     }
 
-    deletePost(id){
-        axios.delete('/posts/'+id)
-        .then(res => console.log(res.data));
+    deletePost(){
+        axios.get('/posts/category/'+ this.props.match.params.catId)
+        .then(response => {
+            // const Fpic = require(`../images/${response.data.post_image}`);
             this.setState({
-                posts: this.state.posts.filter(el => el._id !== id)
-            })
+                posts: response.data
+            });
+            console.log(response.data[0]);
+            // alert("timi");
+            // alert(response.data);
+        })
         .catch((error) => console.log(error));
     }
 
@@ -59,7 +64,7 @@ export default class Category extends Component{
                     <ul className="list-group list-group-horizontal">
                     { this.state.categories.map(cat => {
                         return(
-                            <li className="list-group-item m-auto" key={cat.category_id}><Link to={`category/${cat.category}`} className='text-danger'>{cat.category}</Link></li>
+                            <li className="list-group-item m-auto" key={cat.category_id}><Link onClick={this.deletePost()} to={`/category/${cat.category}`} className='text-danger'>{cat.category}</Link></li>
                         )
                     })}
                     </ul>

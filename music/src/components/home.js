@@ -56,7 +56,7 @@ export default class Home extends Component{
                     <ul className="list-group list-group-horizontal">
                     { this.state.categories.map(cat => {
                         return(
-                            <li className="list-group-item m-auto"><Link to={`category/${cat.category}`} className='text-danger'>{cat.category}</Link></li>
+                            <li className="list-group-item m-auto"><Link to={`/category/${cat.category}`} className='text-danger'>{cat.category}</Link></li>
                         )
                     })}
                     </ul>
@@ -95,7 +95,7 @@ export default class Home extends Component{
                         <p className='glyphicon glyphicon-time pt-md-2'>
                             {currentpost.post_content.substring(0, 200)}...
                           </p>
-                          <Link to={`post/${currentpost._id}`} className='text-danger'>Read more{" >"}</Link>
+                          <Link to={`/post/${currentpost._id}`} className='text-danger'>Read more{" >"}</Link>
                           <p className='glyphicon glyphicon-time pt-md-2'>
                             on &nbsp;
                             {new Date(currentpost.post_date).getDate()}-{new Date(currentpost.post_date).getUTCMonth()}-{new Date(currentpost.post_date).getFullYear()}

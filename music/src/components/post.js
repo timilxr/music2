@@ -99,7 +99,7 @@ pic: '' };
                     <ul className="list-group list-group-horizontal text-center">
                     { this.state.categories.map(cat => {
                         return(
-                            <li className="list-group-item m-auto" key={cat.category_id}><Link to={`category/${cat.category}`} className='text-danger'>{cat.category}</Link></li>
+                            <li className="list-group-item m-auto" key={cat.category_id}><Link to={`/category/${cat.category}`} className='text-danger'>{cat.category}</Link></li>
                         )
                     })}
                     </ul>
