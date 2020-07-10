@@ -8,7 +8,7 @@ import Login from './components/admin/login';
 import Home from './components/home';
 import Post from './components/post';
 import Category from './components/category';
-import SideNav from './components/sidenav';
+// import SideNav from './components/sidenav';
 // import AddPost from './components/add_post';
 
 function App() {
