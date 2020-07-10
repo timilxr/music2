@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+/music/src/components/sidenav.js
 
 # testing
 /coverage

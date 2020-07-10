@@ -20,7 +20,7 @@ function App() {
       <Route path='/admin' component={Login} />
       <Route exact path='/' component={Home} />
       <Route exact path='/post/:topicId' component={Post} />
-      <Route exact path='/side' component={SideNav} />
+      {/* <Route exact path='/side' component={SideNav} /> */}
       <Route exact path='/category/:catId' component={Category} />
     </Switch>
     {/* <Login /> */}
