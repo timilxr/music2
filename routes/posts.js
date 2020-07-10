@@ -37,7 +37,7 @@ router.route('/add').post((req, res)=>{
                 // const post_file = audfullPath;
                 const post_comment_count = 0;
                 if(posts.length > 0){
-                    var post_id = posts[posts.length - 1] + 1;
+                    var post_id = posts[posts.length - 1].post_id + 1;
                 } else {
                     post_id = 1;
                 }
@@ -88,7 +88,7 @@ router.route('/:id').get((req, res)=>{
 });
 
 router.route('/category/:category').get((req, res)=>{
-    Post.find({post_category: req.param.category})
+    Post.find({post_category: req.params.category})
     .then(user=>{
         res.json(user);
     })

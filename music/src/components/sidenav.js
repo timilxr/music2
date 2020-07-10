@@ -4,46 +4,90 @@ import { Link} from 'react-router-dom';
 // import { Button } from 'react-bootstrap';
 
 
-export default class Home extends Component{
+export default class SideNav extends Component{
     constructor(props){
         super(props);
         // let mat = path;
 
-        this.deletePost = this.deletePost.bind(this);
+        this.catPosts = this.catPosts.bind(this);
 
         this.state = { posts: [],
         categories: [] };
     }
 
     componentDidMount(){
-        axios.get('/posts/')
-        .then(response => {
-            this.setState({
-                posts: response.data
-            });
-            // alert(response.data);
-        })
-        .catch((error) => console.log(error));
-
         axios.get('/categories/')
         .then(response => {
             this.setState({
                 categories: response.data
             });
+            const bill = response.data;
             // alert(response.data);
+            for (let index = 0; index < bill.length; index++) {
+                let element = bill[index].category;
+                console.log(element);
+            
+                axios.get('/posts/category/'+ element)
+            .then(response => {
+                // const Fpic = require(`../images/${response.data.post_image}`);
+                this.setState({
+                    index: response.data
+                });
+                console.log(this.state.index);
+                // console.log(response.data[0]);
+                // alert("timi");
+                // alert(response.data);
+            })
+            .catch((error) => console.log(error));
+        };
         })
         .catch((error) => console.log(error));
+        console.log(this.state);
+
+        
     }
 
-    deletePost(id){
-        axios.delete('/posts/'+id)
-        .then(res => console.log(res.data));
-            this.setState({
-                posts: this.state.posts.filter(el => el._id !== id)
+    catPosts(c=[]){
+        // let match = useRouteMatch();
+        // console.log(match.path);
+        axios.get('/posts/category/'+ element)
+            .then(response => {
+                // const Fpic = require(`../images/${response.data.post_image}`);
+                
+                  const index = response.data;
+              
+                console.log(this.state.index);
+                // console.log(response.data[0]);
+                // alert("timi");
+                // alert(response.data);
             })
-        .catch((error) => console.log(error));
+            .catch((error) => console.log(error));
+        console.log(this.props.match.url);
+        return (
+            <div  className="p-2" >
+                        { c.map(currentpost => {
+                            const image = currentpost.post_image;
+                           
+                            var id = 'make' +currentpost.post_id 
+                            id  = require(`../images/${image}`);
+            return (<div className="card p-2 p-md-4" key={currentpost.post_id}>
+                    {/* <a href="post.php?p_id=<?php echo $post_id?>"> */}
+                    <img width='' height='' className='card-img-top img-thumbnail' alt={image} src={id} />
+                    <div className="card-body">
+                    <h3 className="pt-md-2 card-title text-capitalize">
+                            {currentpost.post_title}
+                          </h3>
+                          <h6 className="pt-md-2 card-subtitle font-italic">
+                            By {currentpost.post_author}
+                          </h6>
+                    </div>
+                        
+                    <hr />
+                </div>)
+        }) }
+        </div>
+          );
     }
-
     // postList(){
     //     return 
     // }
@@ -56,7 +100,7 @@ export default class Home extends Component{
                     <ul className="list-group list-group-horizontal">
                     { this.state.categories.map(cat => {
                         return(
-                            <li className="list-group-item"><Link to={`category/${cat.category}`} className='text-danger'>{cat.category}</Link></li>
+                            <li className="list-group-item" key={cat.category_id}><Link to={`category/${cat.category}`} className='text-danger'>{cat.category}</Link></li>
                         )
                     })}
                     </ul>
@@ -95,7 +139,7 @@ export default class Home extends Component{
                         <p className='glyphicon glyphicon-time pt-md-2'>
                             {currentpost.post_content.substring(0, 200)}...
                           </p>
-                          <Link to={`post/${currentpost._id}`} className='text-danger'>Read more{" >"}</Link>
+                          <Link to={`/post/${currentpost._id}`} className='text-danger'>Read more{" >"}</Link>
                           <p className='glyphicon glyphicon-time pt-md-2'>
                             on &nbsp;
                             {new Date(currentpost.post_date).getDate()}-{new Date(currentpost.post_date).getUTCMonth()}-{new Date(currentpost.post_date).getFullYear()}

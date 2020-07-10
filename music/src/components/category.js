@@ -22,7 +22,7 @@ export default class Category extends Component{
             this.setState({
                 posts: response.data
             });
-            console.log(this.state.posts);
+            console.log(response.data[0]);
             // alert("timi");
             // alert(response.data);
         })
@@ -56,10 +56,10 @@ export default class Category extends Component{
             <div>
                 <h1 className="text-center text-info">First--Blog</h1>
                 <div>
-                    <ul className="list-group-horizontal">
+                    <ul className="list-group list-group-horizontal">
                     { this.state.categories.map(cat => {
                         return(
-                            <li className="list-group-item"><Link to={`category/${cat.category}`} className='text-danger'>{cat.category}</Link></li>
+                            <li className="list-group-item" key={cat.category_id}><Link to={`category/${cat.category}`} className='text-danger'>{cat.category}</Link></li>
                         )
                     })}
                     </ul>
@@ -98,7 +98,7 @@ export default class Category extends Component{
                         <p className='glyphicon glyphicon-time pt-md-2'>
                             {currentpost.post_content.substring(0, 200)}...
                           </p>
-                          <Link to={`post/${currentpost._id}`} className='text-danger'>Read more{" >"}</Link>
+                          <Link to={`/post/${currentpost._id}`} className='text-danger'>Read more{" >"}</Link>
                           <p className='glyphicon glyphicon-time pt-md-2'>
                             on &nbsp;
                             {new Date(currentpost.post_date).getDate()}-{new Date(currentpost.post_date).getUTCMonth()}-{new Date(currentpost.post_date).getFullYear()}

@@ -13,14 +13,14 @@ const commentSchema = new Schema({
     comment_author: {
         type: String,
         required: true,
-        unique: true,
+        // unique: true,
         trim: true,
         minlength: 3
     }, 
     comment_status: {
         type: String,
         required: true,
-        unique: true,
+        // unique: true,
         trim: true,
         minlength: 3
     }, 
@@ -35,7 +35,7 @@ const commentSchema = new Schema({
     comment_content: {
         type: String,
         required: true,
-        unique: true,
+        // unique: true,
         trim: true,
         minlength: 3
     },   

@@ -7,14 +7,14 @@ const userSchema = new Schema({
     firstname: {
         type: String,
         required: true,
-        unique: true,
+        // unique: true,
         trim: true,
         minlength: 3
     }, 
     lastname: {
         type: String,
         required: true,
-        unique: true,
+        // unique: true,
         trim: true,
         minlength: 3
     }, 
@@ -28,7 +28,7 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true,
-        unique: true,
+        // unique: true,
         trim: true,
         minlength: 3
     },

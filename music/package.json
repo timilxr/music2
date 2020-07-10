@@ -17,6 +17,7 @@
     "file-exists": "^5.0.1",
     "file-system": "^2.2.2",
     "fs": "0.0.1-security",
+    "http-proxy-middleware": "^1.0.5",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
     "react-datepicker": "^3.0.0",

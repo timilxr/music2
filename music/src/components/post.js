@@ -18,6 +18,7 @@ export default class Post extends Component{
 post_content: '',
 post_date: '',
 post_image: '',
+categories: [],
 post_id: '',
 pic: '' };
     }
@@ -36,7 +37,14 @@ pic: '' };
                 pic: Fpic
             });
             console.log(this.state.post_title);
-            // alert("timi");
+        })
+        .catch((error) => console.log(error));
+
+        axios.get('/categories/')
+        .then(response => {
+            this.setState({
+                categories: response.data
+            });
             // alert(response.data);
         })
         .catch((error) => console.log(error));
@@ -67,7 +75,7 @@ pic: '' };
               </ul>
         
               <Switch>
-                <Route path={`${this.props.match.path}/:topicId`}>
+                <Route path={`post/:topicId`}>
                   {this.Topic()}
                 </Route>
                 <Route path={this.props.match.path}>
@@ -86,6 +94,17 @@ pic: '' };
             //                 var id = 'make' +this.state.post_id 
             //                 id  = require(`../images/${image}`);
         return(
+          <div>
+             <div>
+                    <ul className="list-group list-group-horizontal text-center">
+                    { this.state.categories.map(cat => {
+                        return(
+                            <li className="list-group-item m-auto" key={cat.category_id}><Link to={`category/${cat.category}`} className='text-danger'>{cat.category}</Link></li>
+                        )
+                    })}
+                    </ul>
+                    <hr />
+                </div>
             <div className="row">
                <div className="col-8">
                    
@@ -104,9 +123,9 @@ pic: '' };
                         {/* </div>
                         <div className="col-lg-6 col-md-6 col-6 text-center"> */}
                         <p className='glyphicon glyphicon-time pt-md-2'>
-                            {this.state.post_content.substring(0, 200)}...
+                            {this.state.post_content}
                           </p>
-                          <Link to={`post/${this.state._id}`} className='text-danger'>Read more{" >"}</Link>
+                          {/* <Link to={`post/${this.state._id}`} className='text-danger'>Read more{" >"}</Link> */}
                           <p className='glyphicon glyphicon-time pt-md-2'>
                             on &nbsp;
                             {new Date(this.state.post_date).getDate()}-{new Date(this.state.post_date).getUTCMonth()}-{new Date(this.state.post_date).getFullYear()}
@@ -122,6 +141,7 @@ pic: '' };
                {this.props.match.url}
                </div>
             </div>
+          </div>
         )
     }
 }
