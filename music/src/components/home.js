@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import { Link} from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faClock } from '@fortawesome/free-solid-svg-icons';
 // import { Button } from 'react-bootstrap';
 
 
@@ -51,12 +54,13 @@ export default class Home extends Component{
     render(){
         return(
             <div>
-                <h1 className="text-center text-info">First--Blog</h1>
+                <h1 className="text-center text-info shadom"><Link to='/' className=''>FIRST--BlOG</Link></h1>
                 <div>
+                    <hr />
                     <ul className="list-group list-group-horizontal">
                     { this.state.categories.map(cat => {
                         return(
-                            <li className="list-group-item m-auto"><Link to={`/category/${cat.category}`} className='text-danger'>{cat.category}</Link></li>
+                            <li className="list-group-item mx-auto" key={cat.category_id}><Link to={`/category/${cat.category}`} className='text-danger'>{cat.category}</Link></li>
                         )
                     })}
                     </ul>
@@ -78,31 +82,38 @@ export default class Home extends Component{
                            
                             var id = 'make' +currentpost.post_id 
                             id  = require(`../images/${image}`);
-            return (<div className="p-2 p-md-4" key={currentpost.post_id}>
-                    {/* <a href="post.php?p_id=<?php echo $post_id?>"> */}
+            return (<div className="p-2 p-md-4 row shadow mb-3 rounded" key={currentpost.post_id}>
+                <div className='col-3 pt-3'>
+                <img width='' height='' className='img-responsive img-fluid img-thumbnail' alt={image} src={id} />
+                </div>
+                    <div className='col-9'>
+                        {/* <a href="post.php?p_id=<?php echo $post_id?>"> */}
                     <h3 className="pt-md-2 text-capitalize">
                             {currentpost.post_title}
                           </h3>
-                          <h6 className="pt-md-2 font-italic">
-                            By {currentpost.post_author}
-                          </h6>
+                          <span className="pt-md-2 font-italic mr-3">
+                            <FontAwesomeIcon icon={faUser} /> By {currentpost.post_author}
+                          </span>
+                          <span className='glyphicon glyphicon-time pt-md-2'>
+                          <FontAwesomeIcon icon={faClock} />&nbsp;
+                            {new Date(currentpost.post_date).getDate()}-{new Date(currentpost.post_date).getMonth()}-{new Date(currentpost.post_date).getFullYear()}
+                          </span>
                         {/* <div class="col-lg-6 col-md-6 col-6"> */}
                           {/* <div class="row justify-content-center"> */}
-                            <img width='' height='' className='img-responsive img-fluid img-thumbnail' alt={image} src={id} />
+                            
                           {/* </div> */}
                         {/* </div>
                         <div className="col-lg-6 col-md-6 col-6 text-center"> */}
-                        <p className='glyphicon glyphicon-time pt-md-2'>
-                            {currentpost.post_content.substring(0, 200)}...
-                          </p>
+                        <div dangerouslySetInnerHTML={{__html: currentpost.post_content.substring(0, 400)}} className='glyphicon glyphicon-time pt-md-2'>
+                            {/* {this.state.post_content} */}
+                            
+                     </div> 
+                          
                           <Link to={`/post/${currentpost._id}`} className='text-danger'>Read more{" >"}</Link>
-                          <p className='glyphicon glyphicon-time pt-md-2'>
-                            on &nbsp;
-                            {new Date(currentpost.post_date).getDate()}-{new Date(currentpost.post_date).getUTCMonth()}-{new Date(currentpost.post_date).getFullYear()}
-                          </p>
                         {/* </div> */}
                       
                     {/* </a> */}
+                    </div>
                     <hr />
                 </div>)
         }) }

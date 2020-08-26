@@ -215,6 +215,7 @@ export default class Login extends Component {
                     signUpError: res.data,
                     isLoading: false
                 });
+                alert(res.data);
             })
             .catch(err=>{
                 console.log('Error: '+ err);
@@ -222,6 +223,8 @@ export default class Login extends Component {
                     signUpError: err,
                     isLoading: false
                 });
+                alert(this.state.signInError);
+
             }
             )
     }

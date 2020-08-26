@@ -2,35 +2,78 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import 'react-quill/dist/quill.bubble.css';
 
 // import {Link} from 'react-router-dom';
 
 export default class AddPost extends Component{
     constructor(props){
         super(props);
+        console.log(props.name);
+        this.modules = {
+            toolbar: [
+              [{ 'font': [] }],
+              [{ 'size': ['small', false, 'large', 'huge'] }],
+              ['bold', 'italic', 'underline'],
+              [{'list': 'ordered'}, {'list': 'bullet'}],
+              [{ 'align': [] }],
+              [{ 'color': [] }, { 'background': [] }],
+              ['link', 'image'],
+              ['clean']
+            ]
+        };
+
+        this.formats = [
+            'font',
+            'size',
+            'bold', 'italic', 'underline',
+            'list', 'bullet',
+            'align',
+            'color', 'background',
+            'link ', 'image',
+            'clean'
+          ];
 
         this.onChangeTitle = this.onChangeTitle.bind(this);
         this.onChangeCategory = this.onChangeCategory.bind(this);
-        this.onChangeAuthor = this.onChangeAuthor.bind(this);
+        // this.onChangeAuthor = this.onChangeAuthor.bind(this);
         this.onChangeStatus = this.onChangeStatus.bind(this);
         this.onChangeImage = this.onChangeImage.bind(this);
         // this.onChangeFile = this.onChangeFile.bind(this);
         this.onChangeContent = this.onChangeContent.bind(this);
         this.onChangeDate = this.onChangeDate.bind(this);
         this.onPost = this.onPost.bind(this);
+        this.rteChange = this.rteChange.bind(this);
 
         this.state={
             post_title: '',
             post_categories: [],
             post_category: '',
-            post_author: '',
+            post_author: props.name,
             post_status: '',
             post_image: null,
             // post_file: null,
             post_content: '',
-            post_date: new Date()
+            post_date: new Date(),
+            richtext: ''
         }
     }
+
+    rteChange = (content, delta, source, editor) => {
+        let gh = editor.getHTML();
+        // gh = editor.getText();
+        this.setState({
+            richtext: gh
+        });
+        
+        console.log(editor.getHTML()); // HTML/rich text
+        console.log(editor.getText()); // plain text
+        console.log(editor.getLength()); // number of characters
+    }
+
+
     componentDidMount(){
         axios.get('/categories/')
         .then(response => {
@@ -41,6 +84,8 @@ export default class AddPost extends Component{
                 });
             } else console.log('no data found');
         });
+        console.log(this.state.post_author);
+        
     }
 
     onChangeTitle(e){
@@ -54,13 +99,12 @@ export default class AddPost extends Component{
         this.setState({
             post_category: e.target.value
         });
-        // console.log(e.target.value);
     }
-    onChangeAuthor(e){
-        this.setState({
-            post_author: e.target.value
-        });
-    }
+    // onChangeAuthor(e){
+    //     this.setState({
+    //         post_author: e.target.value
+    //     });
+    // }
     onChangeStatus(e){
         this.setState({
             post_status: e.target.value
@@ -70,15 +114,8 @@ export default class AddPost extends Component{
         this.setState({
             post_image: e.target.files[0]
         });
-        // console.log(this.state.post_image);
         console.log(e.target.files[0]);
     }
-    // onChangeFile(e){
-    //     this.setState({
-    //         post_file: e.target.files[0]
-    //     });
-    //     console.log(e.target.files[0]);
-    // }
     onChangeContent(e){
         this.setState({
             post_content: e.target.value
@@ -93,17 +130,14 @@ export default class AddPost extends Component{
         e.preventDefault();
     }
     onPost(){
-        // var path = require("path");
-        // var postfile = this.state.post_file.split('\\').join('/');
-        // var file = path.basename(postfile);
+        
         const posts = {
             post_title: this.state.post_title,
             post_category: this.state.post_category,
             post_author: this.state.post_author,
             post_status: this.state.post_status,
             post_image: this.state.post_image,
-            // post_file: this.state.post_file,
-            post_content: this.state.post_content,
+            post_content: this.state.richtext,
             post_date: this.state.post_date
         };
         console.log(posts);
@@ -112,19 +146,14 @@ export default class AddPost extends Component{
                 'Content-Type': 'multipart/form-data'
             }
         };
-        // console.log(posts);
-        // const File_path = './../../public/files/' + posts.post_file;
-        // const Img_path = './../../public/images/' + posts.post_image;
-        
-        // const file = new File(File_path);
 
-        // alert(File_path);
+
         const formdata = new FormData();
         formdata.append('post_title', this.state.post_title);
         formdata.append('post_category', this.state.post_category);
         formdata.append('post_author', this.state.post_author);
         formdata.append('post_status', this.state.post_status);
-        formdata.append('post_content', this.state.post_content);
+        formdata.append('post_content', this.state.richtext);
         formdata.append('post_date', this.state.post_date);
         formdata.append('image', this.state.post_image);
         console.log(formdata);
@@ -155,10 +184,10 @@ export default class AddPost extends Component{
                             }
                     </select>
                 </div>
-                <div className="form-group">
+                {/* <div className="form-group">
                     <label htmlFor="title"><h5>Post Author</h5></label>
                     <input type="text" className="form-control" name="post_author" required value={this.state.post_author} onChange={this.onChangeAuthor} />
-                </div>
+                </div> */}
                 <div className="form-group">
                     <label htmlFor="title"><h5>Post status</h5></label>
                     <input type="text" className="form-control" name="post_status" required value={this.state.post_status} onChange={this.onChangeStatus}/>
@@ -173,8 +202,11 @@ export default class AddPost extends Component{
                 </div> */}
                 <div className="form-group">
                     <label htmlFor="title"><h5>Post content</h5></label>
-                    <textarea name="post_content" className="form-control" id="" cols="30" rows="10" required value={this.state.post_content} onChange={this.onChangeContent}>
-                    </textarea>
+                    {/* <textarea name="post_content" className="form-control" id="" cols="30" rows="10" required value={this.state.post_content} onChange={this.onChangeContent}>
+                    </textarea> */}
+                    <ReactQuill theme="snow"  modules={this.modules}
+                    formats={this.formats}  onChange={this.rteChange}
+                    value={this.state.richtext || ''}/>
                 </div>
                 <div className='form-group'>
                         <label><h5>Post Date: </h5></label>

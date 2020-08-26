@@ -1,11 +1,15 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import './post.css';
 import { BrowserRouter as Router,
     Switch,
     Route,
     Link,
     // useRouteMatch,
     useParams } from 'react-router-dom';
+    import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faClock } from '@fortawesome/free-solid-svg-icons';
 // import { Button } from 'react-bootstrap';
 
 
@@ -14,14 +18,15 @@ export default class Post extends Component{
         super(props);
 
         this.state = { post_title: '',
-    post_author: '',
-post_content: '',
-post_date: '',
-post_image: '',
-categories: [],
-post_id: '',
-pic: '' };
-    }
+                    post_author: '',
+                    post_content: '',
+                    post_date: '',
+                    post_image: '',
+                    categories: [],
+                    posts: [],
+                    post_id: '',
+                    pic: '' };
+                        }
 
     componentDidMount(){
         axios.get('/posts/'+ this.props.match.params.topicId)
@@ -45,6 +50,16 @@ pic: '' };
             this.setState({
                 categories: response.data
             });
+            // alert(response.data);
+        })
+        .catch((error) => console.log(error));
+
+        axios.get('/posts/')
+        .then(response => {
+            this.setState({
+                posts: response.data
+            });
+            console.log(this.state.posts);
             // alert(response.data);
         })
         .catch((error) => console.log(error));
@@ -95,16 +110,18 @@ pic: '' };
             //                 id  = require(`../images/${image}`);
         return(
           <div>
+                <h1 className="text-center text-info"><Link to='/' className=''>First--Blog</Link></h1>
              <div>
-                    <ul className="list-group list-group-horizontal text-center">
+             <nav class="nav nav-pills flex-column flex-sm-row">
                     { this.state.categories.map(cat => {
                         return(
-                            <li className="list-group-item m-auto" key={cat.category_id}><Link to={`/category/${cat.category}`} className='text-danger'>{cat.category}</Link></li>
+                            <a className="text-sm-center nav-link m-auto" key={cat.category_id}><Link to={`/category/${cat.category}`} className='text-danger active'>{cat.category}</Link></a>
                         )
                     })}
-                    </ul>
+                    </nav>
                     <hr />
                 </div>
+        
             <div className="row">
                <div className="col-8">
                    
@@ -114,7 +131,7 @@ pic: '' };
                             {this.state.post_title}
                           </h1>
                           <h4 className="pt-md-2 font-italic text-center">
-                            By: {this.state.post_author}
+                            By: <FontAwesomeIcon icon={faUser} /> {this.state.post_author}
                           </h4>
                         {/* <div class="col-lg-6 col-md-6 col-6"> */}
                           {/* <div class="row justify-content-center"> */}
@@ -122,13 +139,16 @@ pic: '' };
                           {/* </div> */}
                         {/* </div>
                         <div className="col-lg-6 col-md-6 col-6 text-center"> */}
-                        <p className='glyphicon glyphicon-time pt-md-2'>
-                            {this.state.post_content}
-                          </p>
+                        <div dangerouslySetInnerHTML={{__html: this.state.post_content}} className='content pt-md-2'>
+                            {/* {this.state.post_content} */}
+                            
+                     </div> 
                           {/* <Link to={`post/${this.state._id}`} className='text-danger'>Read more{" >"}</Link> */}
                           <p className='glyphicon glyphicon-time pt-md-2'>
                             on &nbsp;
-                            {new Date(this.state.post_date).getDate()}-{new Date(this.state.post_date).getUTCMonth()}-{new Date(this.state.post_date).getFullYear()}
+                            <FontAwesomeIcon icon={faClock} /> &nbsp;
+                            {this.state.post_date ? new Date(this.state.post_date).getDate()-new Date(this.state.post_date).getUTCMonth()-new Date(this.state.post_date).getFullYear() : ''}
+                             
                           </p>
                         {/* </div> */}
                       
@@ -140,6 +160,46 @@ pic: '' };
                    {this.exerciseList()}
                {this.props.match.url}
                </div>
+               <div class='m-5'>
+                <div id="carouselExampleSlidesOnly" class="carousel slide " data-ride="carousel">
+                  <div class="carousel-inner">
+                    <div className="carousel-item active">
+                                  trfttrtr
+                                  {/* <img width='300' className='img-responsive img-fluid img-thumbnail' src={id} alt={post.post_title} /> */}
+                                  <div className="carousel-caption d-md-block">
+                                    {/* <h5>{post.post_title}</h5> */}
+                                    <p>tdsytstg</p>
+                                    {/* <div dangerouslySetInnerHTML={{__html: post.post_content.substring(0, 100)}} className='glyphicon glyphicon-time pt-md-2 text-info'></div> */}
+                                  </div>
+                                </div>
+               { this.state.posts.map(post => {
+                 var image = post.post_image;
+                 var id = '';
+                  id  = require(`../images/${image}`);
+                        return(
+                          // <div>
+                            <div className="carousel-item ">
+                                  trfttrtr
+                                  <img className='img-responsive img-fluid img-thumbnail' src={id} alt={post.post_title} />
+                                  <div className="carousel-caption d-md-block">
+                                    <h5>{post.post_title}</h5>
+                                    <p>tdsytstg</p>
+                                    <div dangerouslySetInnerHTML={{__html: post.post_content.substring(0, 100)}} className='glyphicon glyphicon-time pt-md-2 text-info'></div>
+                                  </div>
+                                </div>
+                        )
+                    })} 
+                    <a class="carousel-control-prev" href="#carouselExampleSlidesOnly" role="button" data-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleSlidesOnly   " role="button" data-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Next</span>
+                    </a>
+                  </div>
+                </div>
+               </div> 
             </div>
           </div>
         )

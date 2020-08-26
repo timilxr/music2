@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import { Link} from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faClock } from '@fortawesome/free-solid-svg-icons';
 // import { Button } from 'react-bootstrap';
 
 
@@ -38,16 +41,14 @@ export default class Category extends Component{
         .catch((error) => console.log(error));
     }
 
-    deletePost(){
-        axios.get('/posts/category/'+ this.props.match.params.catId)
+    deletePost(g){
+        axios.get('/posts/category/'+ g)
         .then(response => {
-            // const Fpic = require(`../images/${response.data.post_image}`);
             this.setState({
                 posts: response.data
             });
             console.log(response.data[0]);
-            // alert("timi");
-            // alert(response.data);
+            console.log(g);
         })
         .catch((error) => console.log(error));
     }
@@ -59,12 +60,12 @@ export default class Category extends Component{
     render(){
         return(
             <div>
-                <h1 className="text-center text-info">First--Blog</h1>
+                <h1 className="text-center text-info"><Link to='/' className=''>First--Blog</Link></h1>
                 <div>
                     <ul className="list-group list-group-horizontal">
                     { this.state.categories.map(cat => {
                         return(
-                            <li className="list-group-item m-auto" key={cat.category_id}><Link onClick={this.deletePost()} to={`/category/${cat.category}`} className='text-danger'>{cat.category}</Link></li>
+                            <li className="list-group-item m-auto"  onClick={()=>{this.deletePost(cat.category)}} key={cat.category_id}><Link to={`/category/${cat.category}`} className='text-danger'>{cat.category}</Link></li>
                         )
                     })}
                     </ul>
@@ -92,7 +93,7 @@ export default class Category extends Component{
                             {currentpost.post_title}
                           </h3>
                           <h6 className="pt-md-2 font-italic">
-                            By {currentpost.post_author}
+                            By <FontAwesomeIcon icon={faUser} /> {currentpost.post_author}
                           </h6>
                         {/* <div class="col-lg-6 col-md-6 col-6"> */}
                           {/* <div class="row justify-content-center"> */}
@@ -100,12 +101,14 @@ export default class Category extends Component{
                           {/* </div> */}
                         {/* </div>
                         <div className="col-lg-6 col-md-6 col-6 text-center"> */}
-                        <p className='glyphicon glyphicon-time pt-md-2'>
-                            {currentpost.post_content.substring(0, 200)}...
-                          </p>
+                        <div dangerouslySetInnerHTML={{__html: currentpost.post_content.substring(0, 400)}} className='glyphicon glyphicon-time pt-md-2'>
+                            {/* {this.state.post_content} */}
+                            
+                     </div> 
                           <Link to={`/post/${currentpost._id}`} className='text-danger'>Read more{" >"}</Link>
                           <p className='glyphicon glyphicon-time pt-md-2'>
                             on &nbsp;
+                            <FontAwesomeIcon icon={faClock} /> &nbsp;
                             {new Date(currentpost.post_date).getDate()}-{new Date(currentpost.post_date).getUTCMonth()}-{new Date(currentpost.post_date).getFullYear()}
                           </p>
                         {/* </div> */}

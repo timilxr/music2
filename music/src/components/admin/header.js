@@ -18,12 +18,14 @@ export default class Header extends Component{
     constructor(props){
         super(props);
         // console.log(props.link);
-        // console.log(props.path);
+        // console.log(props.user);
         this.state={
             link: props.link,
             path: props.path,
+            name: props.user,
             redirect: false
-        }
+        };
+        console.log(this.state.name);
     }
 
     renderRedirect = () => {
@@ -43,7 +45,8 @@ export default class Header extends Component{
     }
 
     render(){
-        
+        const {name} = this.state;
+        // console.log(name);
         return(
             <div className="bg-info">
                 <Navbar collapseOnSelect bg="dark" variant="dark" expand="md">
@@ -52,7 +55,7 @@ export default class Header extends Component{
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="ml-auto" defaultActiveKey={this.state.path}>
                             <Button variant="outline-danger" onClick={this.props.logout}>Log Out</Button>{' '}
-                            <Link to='/' className='nav-link'><Navbar.Text>Timi</Navbar.Text></Link>
+        <Link to='/' className='nav-link'><Navbar.Text>{name}</Navbar.Text></Link>
                             {/* <Link to='/' className='nav-link'><Navbar.Text>Timi</Navbar.Text></Link> */}
                             {/* <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
                                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
@@ -81,7 +84,7 @@ export default class Header extends Component{
                             <Switch>
                             <Route exact path='/admin' component={Dashboard} />
                                 <Route path='/admin/dashboard' component={Dashboard} />
-                                <Route path='/admin/add_post' component={AddPost} />
+                                <Route path='/admin/add_post' render={(props)=>(<AddPost name={name}/>)} />
                                 <Route path='/admin/view_posts' component={ViewPost} />
                                 <Route path='/admin/users' component={ViewUser} />
                                 <Route path='/admin/Edit_post/:id' component={EditPost} />

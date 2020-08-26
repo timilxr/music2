@@ -2,12 +2,38 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import 'react-quill/dist/quill.bubble.css';
 
 // import {Link} from 'react-router-dom';
 
 export default class EditPost extends Component{
     constructor(props){
         super(props);
+        this.modules = {
+            toolbar: [
+              [{ 'font': [] }],
+              [{ 'size': ['small', false, 'large', 'huge'] }],
+              ['bold', 'italic', 'underline'],
+              [{'list': 'ordered'}, {'list': 'bullet'}],
+              [{ 'align': [] }],
+              [{ 'color': [] }, { 'background': [] }],
+              ['link', 'image'],
+              ['clean']
+            ]
+        };
+
+        this.formats = [
+            'font',
+            'size',
+            'bold', 'italic', 'underline',
+            'list', 'bullet',
+            'align',
+            'color', 'background',
+            'link ', 'image',
+            'clean'
+          ];
 
         this.onChangeTitle = this.onChangeTitle.bind(this);
         this.onChangeCategory = this.onChangeCategory.bind(this);
@@ -17,6 +43,7 @@ export default class EditPost extends Component{
         // this.onChangeFile = this.onChangeFile.bind(this);
         this.onChangeContent = this.onChangeContent.bind(this);
         this.onChangeDate = this.onChangeDate.bind(this);
+        this.rteChange = this.rteChange.bind(this);
         this.onPost = this.onPost.bind(this);
 
         this.state={
@@ -29,10 +56,24 @@ export default class EditPost extends Component{
             // post_file: null,
             post_content: '',
             post_date: new Date(),
+            richtext: '',
             pic: ''
         };
         // const pic = require(`../images/${this.state.post_image}`);
     }
+
+    rteChange = (content, delta, source, editor) => {
+        let gh = editor.getHTML();
+        // gh = editor.getText();
+        this.setState({
+            richtext: gh
+        });
+        
+        console.log(editor.getHTML()); // HTML/rich text
+        console.log(editor.getText()); // plain text
+        console.log(editor.getLength()); // number of characters
+    }
+
     componentDidMount(){
         axios.get('/posts/'+this.props.match.params.id)
         .then(res => {
@@ -44,7 +85,7 @@ export default class EditPost extends Component{
                 post_status: res.data.post_status,
                 post_image: res.data.post_image,
                 // post_file: null,
-                post_content: res.data.post_content,
+                richtext: res.data.post_content,
                 post_date: new Date(res.data.post_date),
                 pic: jack
             });
@@ -123,7 +164,7 @@ export default class EditPost extends Component{
             post_status: this.state.post_status,
             post_image: this.state.post_image,
             // post_file: this.state.post_file,
-            post_content: this.state.post_content,
+            post_content: this.state.richtext,
             post_date: this.state.post_date
         };
         console.log(posts);
@@ -145,7 +186,7 @@ export default class EditPost extends Component{
         formdata.append('post_category', this.state.post_category);
         formdata.append('post_author', this.state.post_author);
         formdata.append('post_status', this.state.post_status);
-        formdata.append('post_content', this.state.post_content);
+        formdata.append('post_content', this.state.richtext);
         formdata.append('post_date', this.state.post_date);
         formdata.append('image', this.state.post_image);
         console.log(formdata);
@@ -194,9 +235,12 @@ export default class EditPost extends Component{
                     <input type="file" className="form-control-file" name="post_file" required onChange={this.onChangeFile}/>
                 </div> */}
                 <div className="form-group">
-                    <label htmlFor="title">Post content</label>
-                    <textarea name="post_content" className="form-control" id="" cols="30" rows="10" required value={this.state.post_content} onChange={this.onChangeContent}>
-                    </textarea>
+                    <label htmlFor="title"><h5>Post content</h5></label>
+                    {/* <textarea name="post_content" className="form-control" id="" cols="30" rows="10" required value={this.state.post_content} onChange={this.onChangeContent}>
+                    </textarea> */}
+                    <ReactQuill theme="snow"  modules={this.modules}
+                    formats={this.formats}  onChange={this.rteChange}
+                    value={this.state.richtext || ''}/>
                 </div>
                 <div className='form-group'>
                         <label>Post Date: </label>
