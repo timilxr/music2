@@ -34,7 +34,8 @@ router.route('/add').post((req, res)=>{
                 const post_author = req.body.post_author;
                 const post_status = req.body.post_status;
                 const post_image = imgfullName;
-                // const post_file = audfullPath;
+                const post_authormail = req.body.post_authormail;
+                // const post_file = audfull
                 const post_comment_count = 0;
                 if(posts.length > 0){
                     var post_id = posts[posts.length - 1].post_id + 1;
@@ -68,6 +69,15 @@ router.route('/add').post((req, res)=>{
         }        
     }
 });
+});
+
+router.route('/:email').get((req, res)=>{
+    Post.find({post_authormail: req.params.post_authormail})
+    .then(posts=>{
+        res.json(posts);
+        // console.log(posts);
+    })
+    .catch(err => res.status(400).json('Error: '+ err))
 });
 
 router.route('/').get((req, res)=>{

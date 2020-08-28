@@ -52,6 +52,7 @@ export default class AddPost extends Component{
             post_categories: [],
             post_category: '',
             post_author: props.name,
+            post_authormail: props.mail,
             post_status: '',
             post_image: null,
             // post_file: null,
@@ -135,6 +136,7 @@ export default class AddPost extends Component{
             post_title: this.state.post_title,
             post_category: this.state.post_category,
             post_author: this.state.post_author,
+            post_authormail: this.state.post_authormail,
             post_status: this.state.post_status,
             post_image: this.state.post_image,
             post_content: this.state.richtext,
@@ -152,6 +154,7 @@ export default class AddPost extends Component{
         formdata.append('post_title', this.state.post_title);
         formdata.append('post_category', this.state.post_category);
         formdata.append('post_author', this.state.post_author);
+        formdata.append('post_authormail', this.state.post_authormail);
         formdata.append('post_status', this.state.post_status);
         formdata.append('post_content', this.state.richtext);
         formdata.append('post_date', this.state.post_date);

@@ -23,9 +23,10 @@ export default class Header extends Component{
             link: props.link,
             path: props.path,
             name: props.user,
+            mail: props.mail,
             redirect: false
         };
-        console.log(this.state.name);
+        console.log(this.state.mail);
     }
 
     renderRedirect = () => {
@@ -45,7 +46,7 @@ export default class Header extends Component{
     }
 
     render(){
-        const {name} = this.state;
+        const {name, mail} = this.state;
         // console.log(name);
         return(
             <div className="bg-info">
@@ -84,8 +85,8 @@ export default class Header extends Component{
                             <Switch>
                             <Route exact path='/admin' component={Dashboard} />
                                 <Route path='/admin/dashboard' component={Dashboard} />
-                                <Route path='/admin/add_post' render={(props)=>(<AddPost name={name}/>)} />
-                                <Route path='/admin/view_posts' component={ViewPost} />
+                                <Route path='/admin/add_post' render={(props)=>(<AddPost name={name} mail={mail}/>)} />
+                                <Route path='/admin/view_posts' render={(props)=>(<ViewPost name={name} mail={mail}/>)} />
                                 <Route path='/admin/users' component={ViewUser} />
                                 <Route path='/admin/Edit_post/:id' component={EditPost} />
                                 <Route path='/admin/categories' component={AddCategory} />

@@ -105,7 +105,7 @@ export default class Category extends Component{
                             {/* {this.state.post_content} */}
                             
                      </div> 
-                          <Link to={`/post/${currentpost._id}`} className='text-danger'>Read more{" >"}</Link>
+                          <Link to={`/post/${currentpost._id}`} className='text-danger'><h6>Read more{" >"}</h6></Link>
                           <p className='glyphicon glyphicon-time pt-md-2'>
                             on &nbsp;
                             <FontAwesomeIcon icon={faClock} /> &nbsp;

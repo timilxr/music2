@@ -8,10 +8,11 @@ router.route('/add').post((req, res)=>{
     const lastname = req.body.lastname;
     const email = req.body.email.toLowerCase();
     const password = req.body.password;
+    const category = req.body.category;
     const date = new Date();
 
     const newUser =  new User({
-        firstname, lastname, email, password, date
+        firstname, lastname, email, password, category, date
     });
     newUser.password = newUser.generateHash(newUser.password);
 
@@ -46,7 +47,31 @@ router.route('/update/:id').post((req, res)=>{
         user.lastname = req.body.lastname;
         user.email = req.body.email.toLowerCase();
         user.password = req.body.password.generateHash(password);
+        user.category = req.body.category;
         user.date = new Date();
+
+        user.save()
+        .then(()=>res.json(`user${firstname} updated`))
+        .catch(err => res.status(400).json('Error: '+err))
+    })
+    .catch(err => res.status(400).json('Error: '+err))
+});
+
+router.route('/update_profile/:id').post((req, res)=>{
+
+    newUser.findById(req.params.id)
+    .then(user => {
+        const pass = req.body.oldpassword;
+        // const user = users[0];
+        if(!user.validPassword(pass)){
+            res.json({success: false, message: 'Invalid Password'});
+        }
+        user.firstname = req.body.firstname;
+        user.lastname = req.body.lastname;
+        user.email = req.body.email.toLowerCase();
+        user.password = req.body.password.generateHash(password);
+        // user.category = req.body.category;
+        // user.date = new Date();
 
         user.save()
         .then(()=>res.json(`user${firstname} updated`))
@@ -107,7 +132,7 @@ router.route('/verify/:token').get((req, res)=>{
             .then(persons=>{
                 const person = persons[0];
             const user = users[0];
-            res.json({success: true, message: 'not deleted', token: user.token, user: person.firstname+" "+person.lastname});
+            res.json({success: true, message: 'not deleted', token: user.token, mail: person.email, user: person.firstname+" "+person.lastname});
         })
         .catch(err => res.status(400).json('Error: '+ err))
         }

@@ -109,7 +109,7 @@ export default class Home extends Component{
                             
                      </div> 
                           
-                          <Link to={`/post/${currentpost._id}`} className='text-danger'>Read more{" >"}</Link>
+                          <Link to={`/post/${currentpost._id}`} className='text-danger'><h6>Read more{" >"}</h6></Link>
                         {/* </div> */}
                       
                     {/* </a> */}

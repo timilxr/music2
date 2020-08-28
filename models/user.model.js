@@ -32,6 +32,13 @@ const userSchema = new Schema({
         trim: true,
         minlength: 3
     },
+    category: {
+        type: String,
+        required: true,
+        // unique: true,
+        trim: true,
+        minlength: 3
+    },
     date: {
         type: Date,
         required: true,

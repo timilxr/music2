@@ -25,7 +25,8 @@ export default class Login extends Component {
             signUpEmail: '',
             signUpPassword: '',
             redirect: false,
-            name: ""
+            name: "",
+            mail: ''
         };
 
         this.onSignInChangeEmail = this.onSignInChangeEmail.bind(this);
@@ -54,7 +55,8 @@ export default class Login extends Component {
                     this.setState({
                         token: token,
                         isLoading: false,
-                        name: res.data.user
+                        name: res.data.user,
+                        mail: res.data.mail
                     });
                 }
                 this.setState({
@@ -207,7 +209,8 @@ export default class Login extends Component {
              firstname: signUpFirstname,
              lastname: signUpLastname,
              email: signUpEmail,
-             password: signUpPassword
+             password: signUpPassword,
+             category: 'Subscriber'
          })
             .then(res=>{
                 console.log(res.data);
@@ -242,7 +245,8 @@ export default class Login extends Component {
                 signUpLastname,
                 signUpEmail,
                 signUpPassword,
-                name
+                name,
+                mail
                 // redirect
              } = this.state;
         if (isLoading){
@@ -311,7 +315,7 @@ export default class Login extends Component {
         }
         return(
             // <Dashboard />
-            <Header  logout={this.logout} user={name} link={link} path={path} />
+            <Header  logout={this.logout} mail={mail} user={name} link={link} path={path} />
             //  <div>
             //     { this.renderRedirect() }
             //  </div>
