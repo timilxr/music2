@@ -16,3 +16,6 @@
         font-size: x-large;
     }
 }
+.carousel-item{
+    height: 400px;
+}

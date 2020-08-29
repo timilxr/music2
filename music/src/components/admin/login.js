@@ -249,6 +249,7 @@ export default class Login extends Component {
                 mail
                 // redirect
              } = this.state;
+             console.log(this.state.mail);
         if (isLoading){
             return(<div><p>Loading...</p></div>);
         }

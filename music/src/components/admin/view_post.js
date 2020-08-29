@@ -35,6 +35,8 @@ export default class ViewPost extends Component{
             this.setState({
                 posts: response.data
             });
+            console.log(this.props.mail);
+            console.log(this.state.posts[0]);
             // alert(response.data);
         })
         .catch((error) => console.log(error));
@@ -87,7 +89,9 @@ export default class ViewPost extends Component{
                         <td>{currentpost.post_category}</td>
                         <td>{currentpost.post_comment_count}</td>
                         <td><img src={id} alt={currentpost['post_image']} className='img-fluid'/></td>
-                        <td>{currentpost.post_content.substring(0, 200)}...{currentpost.post_content.length}</td>
+                        <td dangerouslySetInnerHTML={{__html: currentpost.post_content.substring(0, 400)}} className='pt-md-2 img-fluid'>
+                        {/* ...{currentpost.post_content.length} */}
+                        </td>
                         <td>{currentpost.post_date.substring(0,10)}</td>
                         <td>
                             <Link to={'/admin/Edit_post/'+currentpost._id}>

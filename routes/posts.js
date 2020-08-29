@@ -9,7 +9,7 @@ const image = require('./image');
 router.route('/add').post((req, res)=>{
     // console.log(req.body.post_image[0].name);
     console.log(req.file);
-    // console.log(req);
+    console.log(req.body.post_title);
               
             image(req, res,(error) => {
               if(error){
@@ -51,7 +51,8 @@ router.route('/add').post((req, res)=>{
                     post_category, 
                     post_author, 
                     post_status, 
-                    post_image, 
+                    post_image,
+                    post_authormail, 
                     // post_file 
                     post_comment_count, 
                     post_id, 
@@ -72,7 +73,7 @@ router.route('/add').post((req, res)=>{
 });
 
 router.route('/:email').get((req, res)=>{
-    Post.find({post_authormail: req.params.post_authormail})
+    Post.find({post_authormail: req.params.email})
     .then(posts=>{
         res.json(posts);
         // console.log(posts);
@@ -89,7 +90,7 @@ router.route('/').get((req, res)=>{
     .catch(err => res.status(400).json('Error: '+ err))
 });
 
-router.route('/:id').get((req, res)=>{
+router.route('/single/:id').get((req, res)=>{
     Post.findById(req.params.id)
     .then(user=>{
         res.json(user);

@@ -60,7 +60,7 @@ export default class Category extends Component{
     render(){
         return(
             <div>
-                <h1 className="text-center text-info"><Link to='/' className=''>First--Blog</Link></h1>
+                <h1 className="text-center text-info shadom"><Link to='/' className=''>FIRST--BlOG</Link></h1>
                 <div>
                     <ul className="list-group list-group-horizontal">
                     { this.state.categories.map(cat => {

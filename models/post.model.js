@@ -21,6 +21,12 @@ const postSchema = new Schema({
         trim: true,
         minlength: 3
     }, 
+    post_authormail: {
+        type: String,
+        required: true,
+        trim: true,
+        minlength: 3
+    }, 
     post_status: {
         type: String,
         required: true,

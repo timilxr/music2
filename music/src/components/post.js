@@ -29,7 +29,7 @@ export default class Post extends Component{
                         }
 
     componentDidMount(){
-        axios.get('/posts/'+ this.props.match.params.topicId)
+        axios.get('/posts/single/'+ this.props.match.params.topicId)
         .then(response => {
             const Fpic = require(`../images/${response.data.post_image}`);
             this.setState({
@@ -110,9 +110,9 @@ export default class Post extends Component{
             //                 id  = require(`../images/${image}`);
         return(
           <div>
-                <h1 className="text-center text-info"><Link to='/' className=''>First--Blog</Link></h1>
+                <h1 className="text-center text-info shadom"><Link to='/' className=''>FIRST--BlOG</Link></h1>
              <div>
-             <nav class="nav nav-pills flex-column flex-sm-row">
+             <nav className="nav nav-pills flex-column flex-sm-row">
                     { this.state.categories.map(cat => {
                         return(
                             <a className="text-sm-center nav-link m-auto" key={cat.category_id}><Link to={`/category/${cat.category}`} className='text-danger active'>{cat.category}</Link></a>
@@ -160,15 +160,15 @@ export default class Post extends Component{
                    {this.exerciseList()}
                {this.props.match.url}
                </div>
-               <div class='m-5'>
-                <div id="carouselExampleSlidesOnly" class="carousel slide " data-ride="carousel">
-                  <div class="carousel-inner">
+               <div className='mx-auto'>
+                <div id="carouselExampleSlidesOnly" className="carousel slide " data-ride="carousel">
+                  <div className="carousel-inner">
                     <div className="carousel-item active">
-                                  trfttrtr
+                    <h5 className='text-danger'>More Related Posts</h5>
                                   {/* <img width='300' className='img-responsive img-fluid img-thumbnail' src={id} alt={post.post_title} /> */}
                                   <div className="carousel-caption d-md-block">
-                                    {/* <h5>{post.post_title}</h5> */}
-                                    <p>tdsytstg</p>
+                                    <h5 className='text-danger'>More Related Posts</h5>
+                                    {/* <p>tdsytstg</p> */}
                                     {/* <div dangerouslySetInnerHTML={{__html: post.post_content.substring(0, 100)}} className='glyphicon glyphicon-time pt-md-2 text-info'></div> */}
                                   </div>
                                 </div>
@@ -178,24 +178,24 @@ export default class Post extends Component{
                   id  = require(`../images/${image}`);
                         return(
                           // <div>
-                            <div className="carousel-item ">
-                                  trfttrtr
+                            <div className="carousel-item" key={post.post_id}>
+                                 
                                   <img className='img-responsive img-fluid img-thumbnail' src={id} alt={post.post_title} />
                                   <div className="carousel-caption d-md-block">
                                     <h5>{post.post_title}</h5>
-                                    <p>tdsytstg</p>
+                                    <p></p>
                                     <div dangerouslySetInnerHTML={{__html: post.post_content.substring(0, 100)}} className='glyphicon glyphicon-time pt-md-2 text-info'></div>
                                   </div>
                                 </div>
                         )
                     })} 
-                    <a class="carousel-control-prev" href="#carouselExampleSlidesOnly" role="button" data-slide="prev">
-                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                      <span class="sr-only">Previous</span>
+                    <a className="carousel-control-prev" href="#carouselExampleSlidesOnly" role="button" data-slide="prev">
+                      <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span className="sr-only">Previous</span>
                     </a>
-                    <a class="carousel-control-next" href="#carouselExampleSlidesOnly   " role="button" data-slide="next">
-                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                      <span class="sr-only">Next</span>
+                    <a className="carousel-control-next" href="#carouselExampleSlidesOnly   " role="button" data-slide="next">
+                      <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span className="sr-only">Next</span>
                     </a>
                   </div>
                 </div>
