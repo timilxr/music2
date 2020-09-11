@@ -80,15 +80,15 @@ export default class ViewPost extends Component{
                             const name = currentpost.post_image;
                            
                             var id = 'make' +currentpost.post_id 
-                            id  = require(`../../images/${name}`);
+                            // id  = require(`../../images/${name}`);
             return <tr key={currentpost._id}>
                         <td>{currentpost.post_id}</td>
                         <td>{currentpost.post_author}</td>
                         <td>{currentpost.post_status}</td>
                         <td>{currentpost.post_title}</td>
                         <td>{currentpost.post_category}</td>
-                        <td>{currentpost.post_comment_count}</td>
-                        <td><img src={id} alt={currentpost['post_image']} className='img-fluid'/></td>
+                        <td>{currentpost.post_comment_count}</td>{name}
+                        {/* <td><img src={id} alt={currentpost['post_image']} className='img-fluid'/></td> */}
                         <td dangerouslySetInnerHTML={{__html: currentpost.post_content.substring(0, 400)}} className='pt-md-2 img-fluid'>
                         {/* ...{currentpost.post_content.length} */}
                         </td>
