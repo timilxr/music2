@@ -165,7 +165,6 @@ export default class AddPost extends Component{
         .then(res => {console.log(res.data);alert("The file is successfully uploaded. New Post Added.");})
         .catch(err => alert('err: ' + err));
 
-        // window.location = '/';
     }
 
     render(){

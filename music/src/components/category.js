@@ -65,14 +65,15 @@ export default class Category extends Component{
     }
 
     authors(){
-        return(
-        <ul className="list-group mx-auto">
+        return(<div class='d-flex flex-wrap'>
+        {/* <ul className="list-group list-group-horizontal mx-auto"> */}
             {this.state.authors.map(author =>{
                 const fullname = author.firstname + ' ' + author.lastname;
-            return(<li className="list-group-item m-auto" key={author._id}><Link to={`/author/${fullname}`}>{fullname}</Link></li>);
+            return(<div className='px-2 bd-highlight text-capitalize'  key={author._id}><Link to={`/author/${fullname}`}>{fullname}</Link></div>);
             })
             }
-        </ul>
+       {/* </ul> */}
+       </div>
         )
     }
 
@@ -143,7 +144,15 @@ export default class Category extends Component{
                 </div>)
         }) }
         </div>
-    <div className='col-4 p-2 shadow mb-3 rounded'>{this.authors()}</div>
+        <div className="col-md-4">
+        <div className="shadow mb-3 rounded">
+        <h2 className="text-center my-3">Authors</h2>
+        <div className="text-center my-3">{this.authors()}</div>
+        </div>
+        <div className="shadow mb-3 rounded">
+        <h2 className="text-center my-3">Tags</h2>
+        </div>
+        </div>
         </div>
         </div>
             </div>

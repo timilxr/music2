@@ -30,7 +30,7 @@ export default class ViewPost extends Component{
     }
 
     componentDidMount(){
-        axios.get('/posts/' + this.props.mail)
+        axios.get('/posts/')
         .then(response => {
             this.setState({
                 posts: response.data

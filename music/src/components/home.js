@@ -18,6 +18,7 @@ export default class Home extends Component{
         this.deletePost = this.deletePost.bind(this);
 
         this.state = { posts: [],
+            authors: [],
         categories: [] };
     }
 
@@ -43,6 +44,15 @@ export default class Home extends Component{
             // alert(response.data);
         })
         .catch((error) => console.log(error));
+
+        axios.get('/users/')
+        .then(response => {
+            this.setState({
+                authors: response.data
+            });
+            // alert(response.data);
+        })
+        .catch((error) => console.log(error));
     }
 
     deletePost(id){
@@ -52,6 +62,19 @@ export default class Home extends Component{
                 posts: this.state.posts.filter(el => el._id !== id)
             })
         .catch((error) => console.log(error));
+    }
+
+    authors(){
+        return(<div class='d-flex flex-wrap'>
+        {/* <ul className="list-group list-group-horizontal mx-auto"> */}
+            {this.state.authors.map(author =>{
+                const fullname = author.firstname + ' ' + author.lastname;
+            return(<div className='px-2 bd-highlight text-capitalize'  key={author._id}><Link to={`/author/${fullname}`}>{fullname}</Link></div>);
+            })
+            }
+       {/* </ul> */}
+       </div>
+        )
     }
 
     // postList(){
@@ -116,10 +139,10 @@ export default class Home extends Component{
                             
                      {/* </div>  */}
                      <ReactQuill
-   value={currentpost.post_content.substring(0, 800)}
-   readOnly={true}
-   theme={"bubble"} className='glyphicon glyphicon-time pt-md-2'
-/>
+                        value={currentpost.post_content.substring(0, 800)}
+                        readOnly={true}
+                        theme={"bubble"} className='glyphicon glyphicon-time pt-md-2'
+                        />
                           
                           <Link to={`/post/${currentpost._id}`} className='text-danger'><h6>Read more{" >"}</h6></Link>
                         {/* </div> */}
@@ -133,11 +156,12 @@ export default class Home extends Component{
         <div className="col-md-4">
         <div className="shadow mb-3 rounded">
         <h2 className="text-center my-3">Authors</h2>
+        {/* <div className=""></div> */}
+        {this.authors()}
         </div>
         <div className="shadow mb-3 rounded">
         <h2 className="text-center my-3">Tags</h2>
         </div>
-
         </div>
         </div>
         </div>
