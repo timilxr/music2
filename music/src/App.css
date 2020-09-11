@@ -36,3 +36,7 @@
     transform: rotate(360deg);
   }
 }
+.container-fluid{
+  background-color: #e6e3db;
+  color: #555555;
+}

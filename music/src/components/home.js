@@ -4,6 +4,9 @@ import { Link} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faClock } from '@fortawesome/free-solid-svg-icons';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import 'react-quill/dist/quill.bubble.css';
 // import { Button } from 'react-bootstrap';
 
 
@@ -18,12 +21,16 @@ export default class Home extends Component{
         categories: [] };
     }
 
-    componentDidMount(){
+    componentDidMount(content, delta, source, editor){
         axios.get('/posts/')
         .then(response => {
             this.setState({
                 posts: response.data
             });
+            // response.data.forEach(post => {
+            //     post.post_content = editor.getText(post.post_content);
+            // });
+            console.log(editor.getText(this.state.posts[0].post_content));
             // alert(response.data);
         })
         .catch((error) => console.log(error));
@@ -104,10 +111,15 @@ export default class Home extends Component{
                           {/* </div> */}
                         {/* </div>
                         <div className="col-lg-6 col-md-6 col-6 text-center"> */}
-                        <div dangerouslySetInnerHTML={{__html: currentpost.post_content.substring(0, 400)}} className='glyphicon glyphicon-time pt-md-2'>
+                        {/* <div dangerouslySetInnerHTML={{__html: currentpost.post_content.substring(0, 400)}} className='glyphicon glyphicon-time pt-md-2'> */}
                             {/* {this.state.post_content} */}
                             
-                     </div> 
+                     {/* </div>  */}
+                     <ReactQuill
+   value={currentpost.post_content.substring(0, 800)}
+   readOnly={true}
+   theme={"bubble"} className='glyphicon glyphicon-time pt-md-2'
+/>
                           
                           <Link to={`/post/${currentpost._id}`} className='text-danger'><h6>Read more{" >"}</h6></Link>
                         {/* </div> */}
@@ -117,6 +129,15 @@ export default class Home extends Component{
                     <hr />
                 </div>)
         }) }
+        </div>
+        <div className="col-md-4">
+        <div className="shadow mb-3 rounded">
+        <h2 className="text-center my-3">Authors</h2>
+        </div>
+        <div className="shadow mb-3 rounded">
+        <h2 className="text-center my-3">Tags</h2>
+        </div>
+
         </div>
         </div>
         </div>

@@ -81,6 +81,15 @@ router.route('/:email').get((req, res)=>{
     .catch(err => res.status(400).json('Error: '+ err))
 });
 
+router.route('/author/:author').get((req, res)=>{
+    Post.find({post_author: req.params.author})
+    .then(posts=>{
+        res.json(posts);
+        // console.log(posts);
+    })
+    .catch(err => res.status(400).json('Error: '+ err))
+});
+
 router.route('/').get((req, res)=>{
     Post.find()
     .then(users=>{

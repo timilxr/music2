@@ -4,6 +4,7 @@ import { Link} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faClock } from '@fortawesome/free-solid-svg-icons';
+import ReactQuill from 'react-quill';
 // import { Button } from 'react-bootstrap';
 
 
@@ -15,12 +16,14 @@ export default class Category extends Component{
         this.deletePost = this.deletePost.bind(this);
 
         this.state = { posts: [],
+            authors: [],
         categories: [] };
     }
 
     componentDidMount(){
         axios.get('/posts/category/'+ this.props.match.params.catId)
         .then(response => {
+            console.log(this.props.match.params.catId);
             // const Fpic = require(`../images/${response.data.post_image}`);
             this.setState({
                 posts: response.data
@@ -39,6 +42,14 @@ export default class Category extends Component{
             // alert(response.data);
         })
         .catch((error) => console.log(error));
+        axios.get('/users/')
+        .then(response => {
+            this.setState({
+                authors: response.data
+            });
+            // alert(response.data);
+        })
+        .catch((error) => console.log(error));
     }
 
     deletePost(g){
@@ -51,6 +62,18 @@ export default class Category extends Component{
             console.log(g);
         })
         .catch((error) => console.log(error));
+    }
+
+    authors(){
+        return(
+        <ul className="list-group mx-auto">
+            {this.state.authors.map(author =>{
+                const fullname = author.firstname + ' ' + author.lastname;
+            return(<li className="list-group-item m-auto" key={author._id}><Link to={`/author/${fullname}`}>{fullname}</Link></li>);
+            })
+            }
+        </ul>
+        )
     }
 
     // postList(){
@@ -87,7 +110,7 @@ export default class Category extends Component{
                            
                             var id = 'make' +currentpost.post_id 
                             id  = require(`../images/${image}`);
-            return (<div className="p-2 p-md-4" key={currentpost.post_id}>
+            return (<div className="p-2 p-md-4 shadow mb-3 rounded" key={currentpost.post_id}>
                     {/* <a href="post.php?p_id=<?php echo $post_id?>"> */}
                     <h3 className="pt-md-2 text-capitalize">
                             {currentpost.post_title}
@@ -101,10 +124,12 @@ export default class Category extends Component{
                           {/* </div> */}
                         {/* </div>
                         <div className="col-lg-6 col-md-6 col-6 text-center"> */}
-                        <div dangerouslySetInnerHTML={{__html: currentpost.post_content.substring(0, 400)}} className='glyphicon glyphicon-time pt-md-2'>
-                            {/* {this.state.post_content} */}
-                            
-                     </div> 
+                        <ReactQuill
+                        value={currentpost.post_content.substring(0, 800)}
+                        readOnly={true}
+                        theme={"bubble"} className='glyphicon glyphicon-time pt-md-2'
+                        />
+
                           <Link to={`/post/${currentpost._id}`} className='text-danger'><h6>Read more{" >"}</h6></Link>
                           <p className='glyphicon glyphicon-time pt-md-2'>
                             on &nbsp;
@@ -118,6 +143,7 @@ export default class Category extends Component{
                 </div>)
         }) }
         </div>
+    <div className='col-4 p-2 shadow mb-3 rounded'>{this.authors()}</div>
         </div>
         </div>
             </div>

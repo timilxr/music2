@@ -8,6 +8,7 @@ import Login from './components/admin/login';
 import Home from './components/home';
 import Post from './components/post';
 import Category from './components/category';
+import Author from './components/author';
 // import SideNav from './components/sidenav';
 // import AddPost from './components/add_post';
 
@@ -22,6 +23,7 @@ function App() {
       <Route exact path='/post/:topicId' component={Post} />
       {/* <Route exact path='/side' component={SideNav} /> */}
       <Route exact path='/category/:catId' component={Category} />
+      <Route exact path='/author/:author' component={Author} />
     </Switch>
     {/* <Login /> */}
       {/* <Route path={`/admin/add_post`} component={AddPost} /> */}

@@ -10,6 +10,9 @@ import { BrowserRouter as Router,
     import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faClock } from '@fortawesome/free-solid-svg-icons';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import 'react-quill/dist/quill.bubble.css';
 // import { Button } from 'react-bootstrap';
 
 
@@ -76,7 +79,9 @@ export default class Post extends Component{
         console.log(this.props.match.url);
         return (
             <div>
-              <h2>Topics</h2>
+              <h1 className="text-center p-2">About Author</h1>
+              <img width='' height='' className='img-responsive img-fluid img-thumbnail' alt={this.state.post_image} src={this.state.pic} />
+
         
               <ul>
                 <li>
@@ -139,10 +144,14 @@ export default class Post extends Component{
                           {/* </div> */}
                         {/* </div>
                         <div className="col-lg-6 col-md-6 col-6 text-center"> */}
-                        <div dangerouslySetInnerHTML={{__html: this.state.post_content}} className='content pt-md-2'>
+                        {/* <div dangerouslySetInnerHTML={{__html: this.state.post_content}} className='content pt-md-2'> */}
                             {/* {this.state.post_content} */}
-                            
-                     </div> 
+                     {/* </div>  */}
+                     <ReactQuill
+                      value={this.state.post_content}
+                      readOnly={true}
+                      theme={"bubble"}  className='content pt-md-2'
+                    />
                           {/* <Link to={`post/${this.state._id}`} className='text-danger'>Read more{" >"}</Link> */}
                           <p className='glyphicon glyphicon-time pt-md-2'>
                             on &nbsp;
