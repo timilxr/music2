@@ -14,8 +14,7 @@ app.use(express.json());
 // ... hosting
 app.use(express.static(path.join(__dirname, "music", "build")))
 
-const uri = 'mongodb+srv://timi:timilxr@cluster0-mq4uw.gcp.mongodb.net/test?retryWrites=true&w=majority';
-// const uri = process.env.ATLAS_URI;
+const uri = process.env.ATLAS_URI;
 // const uri = process.env.MONGOLAB_CRIMSON_URI;
 mongoose.connect(uri,{useNewUrlParser:true, useCreateIndex: true, useUnifiedTopology:true});
 
