@@ -31,7 +31,7 @@ export default class Home extends Component{
             // response.data.forEach(post => {
             //     post.post_content = editor.getText(post.post_content);
             // });
-            console.log(editor.getText(this.state.posts[0].post_content));
+            // console.log(editor.getText(this.state.posts[0].post_content));
             // alert(response.data);
         })
         .catch((error) => console.log(error));
@@ -69,7 +69,7 @@ export default class Home extends Component{
         {/* <ul className="list-group list-group-horizontal mx-auto"> */}
             {this.state.authors.map(author =>{
                 const fullname = author.firstname + ' ' + author.lastname;
-            return(<div className='px-2 bd-highlight text-capitalize'  key={author._id}><Link to={`/author/${fullname}`}>{fullname}</Link></div>);
+            return(<div className='px-2 bd-highlight text-capitalize'  key={author._id}><Link to={`/author/${fullname}`} className='text-decoration-none'>{fullname}</Link></div>);
             })
             }
        {/* </ul> */}
@@ -154,14 +154,14 @@ export default class Home extends Component{
         }) }
         </div>
         <div className="col-md-4 col-12">
-        <div className="shadow mb-3 rounded">
-        <h2 className="text-center my-3">Authors</h2>
-        {/* <div className=""></div> */}
-        {this.authors()}
-        </div>
-        <div className="shadow mb-3 rounded">
-        <h2 className="text-center my-3">Tags</h2>
-        </div>
+            <div className="shadow rounded p-2">
+                <h2 className="text-center">Authors</h2>
+                {/* <div className=""></div> */}
+                {this.authors()}
+            </div>
+            <div className="shadow rounded p-2">
+                <h2 className="text-center my-3">Tags</h2>
+            </div>
         </div>
         </div>
         </div>

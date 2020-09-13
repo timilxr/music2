@@ -128,7 +128,7 @@ export default class Post extends Component{
                 </div>
         
             <div className="row">
-               <div className="col-8">
+               <div className="col-md-8 col-12">
                    
                <div className="p-2 p-md-4" key={this.state.post_id}>
                     {/* <a href="post.php?p_id=<?php echo $post_id?>"> */}
@@ -165,7 +165,7 @@ export default class Post extends Component{
                     <hr />
                 </div>
                </div>
-               <div className="col-4">
+               <div className="col-md-4 col-12">
                    {this.exerciseList()}
                {this.props.match.url}
                </div>

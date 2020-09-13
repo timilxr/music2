@@ -69,7 +69,7 @@ export default class Category extends Component{
         {/* <ul className="list-group list-group-horizontal mx-auto"> */}
             {this.state.authors.map(author =>{
                 const fullname = author.firstname + ' ' + author.lastname;
-            return(<div className='px-2 bd-highlight text-capitalize'  key={author._id}><Link to={`/author/${fullname}`}>{fullname}</Link></div>);
+            return(<div className='px-2 bd-highlight text-capitalize'  key={author._id}><Link to={`/author/${fullname}`} className='text-decoration-none'>{fullname}</Link></div>);
             })
             }
        {/* </ul> */}
@@ -105,7 +105,7 @@ export default class Category extends Component{
                         </form>
                     </div>
                     <div className="d-flex flew-wrap row mt-3 p-md-5">
-                    <div  className="col-8 p-2" >
+                    <div  className="col-md-8 col-12 p-2" >
                         { this.state.posts.map(currentpost => {
                             const image = currentpost.post_image;
                            
@@ -144,14 +144,15 @@ export default class Category extends Component{
                 </div>)
         }) }
         </div>
-        <div className="col-md-4">
-        <div className="shadow mb-3 rounded">
-        <h2 className="text-center my-3">Authors</h2>
-        <div className="text-center my-3">{this.authors()}</div>
-        </div>
-        <div className="shadow mb-3 rounded">
-        <h2 className="text-center my-3">Tags</h2>
-        </div>
+        <div className="col-md-4 col-12">
+            <div className="shadow rounded p-2">
+                <h2 className="text-center">Authors</h2>
+                {/* <div className=""></div> */}
+                {this.authors()}
+            </div>
+            <div className="shadow rounded p-2">
+                <h2 className="text-center my-3">Tags</h2>
+            </div>
         </div>
         </div>
         </div>
