@@ -12,6 +12,7 @@ import ViewPost from './view_post';
 import ViewUser from './view_users';
 import EditPost from './Edit_posts';
 import AddCategory from './add_category';
+import Profile from './Profile';
 import {Redirect} from 'react-router-dom';
 
 export default class Header extends Component{
@@ -86,6 +87,7 @@ export default class Header extends Component{
                             <Route exact path='/admin' component={Dashboard} />
                                 <Route path='/admin/dashboard' component={Dashboard} />
                                 <Route path='/admin/add_post' render={(props)=>(<AddPost name={name} mail={mail}/>)} />
+                                <Route path='/admin/profile' render={(props)=>(<Profile name={name} mail={mail}/>)} />
                                 <Route path='/admin/view_posts' render={(props)=>(<ViewPost name={name} mail={mail}/>)} />
                                 <Route path='/admin/users' component={ViewUser} />
                                 <Route path='/admin/Edit_post/:id' component={EditPost} />

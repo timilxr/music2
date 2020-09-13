@@ -151,6 +151,7 @@ export default class AddPost extends Component{
 
 
         const formdata = new FormData();
+        formdata.append('image', this.state.post_image);
         formdata.append('post_title', this.state.post_title);
         formdata.append('post_category', this.state.post_category);
         formdata.append('post_author', this.state.post_author);
@@ -158,7 +159,6 @@ export default class AddPost extends Component{
         formdata.append('post_status', this.state.post_status);
         formdata.append('post_content', this.state.richtext);
         formdata.append('post_date', this.state.post_date);
-        formdata.append('image', this.state.post_image);
         console.log(formdata);
         
         axios.post('/posts/add', formdata, config)

@@ -12,12 +12,13 @@ router.route('/add').post((req, res)=>{
     console.log(req.body.post_title);
               
             image(req, res,(error) => {
-              if(error){
-                  res.status(400).json('Error: Invalid File type');
-                  // console.log('err1: '+ error);
-              }else if (error instanceof multer.MulterError) {
+              if (error instanceof multer.MulterError) {
                   // A Multer error occurred when uploading.
                   console.log('err2: '+error);
+                  res.status(400).json('Error: Uploading error');
+                }else if(error){
+                    res.status(400).json('Error: Invalid File type');
+                    // console.log('err1: '+ error);
                 }else {
                 if(req.file == undefined){
                   // console.log('err3: '+error);

@@ -33,6 +33,12 @@ router.route('/:id').get((req, res)=>{
     .catch(err => res.status(400).json('Error: '+ err))
 });
 
+router.route('/email/:email').get((req, res)=>{
+    User.find({email: req.params.email})
+    .then(user=>{user= user[0];res.json(user);})
+    .catch(err => res.status(400).json('Error: '+ err))
+});
+
 router.route('/:id').delete((req, res)=>{
     newUser.findByIdAndDelete(req.params.id)
     .then(()=>res.json('user deleted succesfully'))
@@ -57,9 +63,9 @@ router.route('/update/:id').post((req, res)=>{
     .catch(err => res.status(400).json('Error: '+err))
 });
 
-router.route('/update_profile/:id').post((req, res)=>{
+router.route('/update_profile/:email').post((req, res)=>{
 
-    newUser.findById(req.params.id)
+    newUser.find({email: req.params.email})
     .then(user => {
         const pass = req.body.oldpassword;
         // const user = users[0];
@@ -68,6 +74,8 @@ router.route('/update_profile/:id').post((req, res)=>{
         }
         user.firstname = req.body.firstname;
         user.lastname = req.body.lastname;
+        user.phone = req.body.phone;
+        user.bio = req.body.bio;
         user.email = req.body.email.toLowerCase();
         user.password = req.body.password.generateHash(password);
         // user.category = req.body.category;
