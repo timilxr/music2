@@ -18,7 +18,7 @@ function App() {
     <div className='container-fluid'>
     {/* <Redirect to="/home" /> */}
     <Switch>
-      <Route exact path='/admin' component={Login} />
+      <Route path='/admin' component={Login} />
       <Route exact path='/' component={Home} />
       <Route exact path='/post/:topicId' component={Post} />
       {/* <Route exact path='/side' component={SideNav} /> */}
