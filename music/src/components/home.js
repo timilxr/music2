@@ -65,7 +65,7 @@ export default class Home extends Component{
     }
 
     authors(){
-        return(<div class='d-flex flex-wrap'>
+        return(<div className='d-flex flex-wrap'>
         {/* <ul className="list-group list-group-horizontal mx-auto"> */}
             {this.state.authors.map(author =>{
                 const fullname = author.firstname + ' ' + author.lastname;
@@ -84,7 +84,7 @@ export default class Home extends Component{
     render(){
         return(
             <div>
-                <h1 className="text-center text-info shadom"><Link to='/' className=''>FIRST--BlOG</Link></h1>
+                <h1 className="text-center text-info shadom"><Link to='/' className='text-decoration-none'>FIRST--BlOG</Link></h1>
                 <div>
                     <hr />
                     <ul className="list-group list-group-horizontal">

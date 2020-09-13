@@ -161,7 +161,7 @@ return (<div className="p-2 p-md-4 shadow mb-3 rounded" key={currentpost.post_id
     render(){
         return(
             <div>
-                <h1 className="text-center text-info shadom"><Link to='/' className=''>FIRST--BlOG</Link></h1>
+                <h1 className="text-center text-info shadom"><Link to='/' className='text-decoration-none'>FIRST--BlOG</Link></h1>
                 <div>
                     <ul className="list-group list-group-horizontal">
                     { this.state.categories.map(cat => {
