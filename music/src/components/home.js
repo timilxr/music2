@@ -106,7 +106,7 @@ export default class Home extends Component{
                         </form>
                     </div>
                     <div className="d-flex flew-wrap row mt-3 p-md-5">
-                    <div  className="col-8 p-2" >
+                    <div  className="col-md-8 col-12 p-2" >
                         { this.state.posts.map(currentpost => {
                             const image = currentpost.post_image;
                            
@@ -153,7 +153,7 @@ export default class Home extends Component{
                 </div>)
         }) }
         </div>
-        <div className="col-md-4">
+        <div className="col-md-4 col-12">
         <div className="shadow mb-3 rounded">
         <h2 className="text-center my-3">Authors</h2>
         {/* <div className=""></div> */}
