@@ -184,7 +184,7 @@ export default class Post extends Component{
                { this.state.posts.map(post => {
                  var image = post.post_image;
                  var id = '';
-                  id  = require(`../images/${image}`);
+                  id  = require(`../../../images/${image}`);
                         return(
                           // <div>
                             <div className="carousel-item" key={post.post_id}>
