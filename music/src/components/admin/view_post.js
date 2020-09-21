@@ -80,7 +80,7 @@ export default class ViewPost extends Component{
                             const name = currentpost.post_image;
                            
                             // var id = 'make' +currentpost.post_id 
-                            var id  = require(`../../images/${name}`);
+                            var id  = require(`../../../../images/${name}`);
                             console.log(id);
                             
             return <tr key={currentpost._id}>

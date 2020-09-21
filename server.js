@@ -11,6 +11,7 @@ const port = process.env.PORT || 5001;
 
 app.use(cors());
 app.use(express.json());
+app.use(express.static(path.join(__dirname, 'images')))
 // ... hosting
 app.use(express.static(path.join(__dirname, "music", "build")))
 

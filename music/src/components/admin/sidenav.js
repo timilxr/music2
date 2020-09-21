@@ -57,22 +57,34 @@ export default class Sidenav extends Component{
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="flex-column" defaultActiveKey={this.state.link}>
                             <Nav.Item>
-                                <Link to='/admin/dashboard' className='nav-link mt-3'>DASHBOARD</Link>
+                                <Link to='/admin/dashboard' className='nav-link mt-3'>
+                                <i className="fas fa-sliders-h fa-1x"></i>
+                                    &nbsp;&nbsp;DASHBOARD</Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Link to='/admin/add_post' className='nav-link mt-3'>Add Post</Link>
+                                <Link to='/admin/add_post' className='nav-link mt-3'>
+                                <i className="fas fa-folder-plus fa-1x"></i>
+                                    &nbsp;&nbsp;Add Post</Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Link to='/admin/view_posts' className='nav-link mt-3'>View Posts</Link>
+                                <Link to='/admin/view_posts' className='nav-link mt-3'>
+                                <i className="fas fa-th-list fa-1x"></i>
+                                    &nbsp;&nbsp;View Posts</Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Link to='/admin/categories' className='nav-link mt-3'>Categories</Link>
+                                <Link to='/admin/categories' className='nav-link mt-3'>
+                                <i className="fas fa-layer-group fa-1x"></i>
+                                    &nbsp;&nbsp;Categories</Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Link to='/admin/categories' className='nav-link mt-3'>Add User</Link>
+                                <Link to='/admin/categories' className='nav-link mt-3'>
+                                <i className="fas fa-user-plus"></i>
+                                    &nbsp;&nbsp;Add User</Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Link to='/admin/users' className='nav-link mt-3'>View Users</Link>
+                                <Link to='/admin/users' className='nav-link mt-3'>
+                                <i className="fas fa-users"></i>
+                                    &nbsp;&nbsp;View Users</Link>
                             </Nav.Item>
                             <Nav.Item>
                                 <Button variant="outline-danger" className='mt-3' onClick={this.props.logout}>Log Out</Button>{' '}
