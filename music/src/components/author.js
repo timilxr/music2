@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { faClock } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import ReactQuill from 'react-quill';
 // import { Button } from 'react-bootstrap';
 
@@ -80,7 +80,7 @@ export default class Author extends Component{
     }
 
     authors(){
-        return(<div class='d-flex flex-wrap'>
+        return(<div className='d-flex flex-wrap'>
         {/* <ul className="list-group list-group-horizontal mx-auto"> */}
             {this.state.authors.map(author =>{
                 const fullname = author.firstname + ' ' + author.lastname;
@@ -104,9 +104,9 @@ return (<div className="p-2 p-md-4 shadow mb-3 rounded" key={currentpost.post_id
     <h3 className="pt-md-2 text-capitalize">
             {currentpost.post_title}
           </h3>
-          <h6 className="pt-md-2 font-italic">
+          {/* <h6 className="pt-md-2 font-italic">
             By <FontAwesomeIcon icon={faUser} /> {currentpost.post_author}
-          </h6>
+          </h6> */}
         {/* <div class="col-lg-6 col-md-6 col-6"> */}
           {/* <div class="row justify-content-center"> */}
             <img width='' height='' className='img-responsive img-fluid img-thumbnail rounded' alt={image} src={id} />
@@ -118,12 +118,19 @@ return (<div className="p-2 p-md-4 shadow mb-3 rounded" key={currentpost.post_id
         readOnly={true}
         theme={"bubble"} className='glyphicon glyphicon-time pt-md-2'
         />
+        <span className="pt-md-2 font-italic mr-3">
+                            By <FontAwesomeIcon icon={faUser} /> {currentpost.post_author}
+                          </span>
+                          <span className='glyphicon glyphicon-time pt-md-2'>
+                          <FontAwesomeIcon icon={faCalendarAlt} />&nbsp;
+                            {new Date(currentpost.post_date).getDate()}-{new Date(currentpost.post_date).getMonth()}-{new Date(currentpost.post_date).getFullYear()}
+                          </span>
           <Link to={`/post/${currentpost._id}`} className='text-danger'><h6>Read more{" >"}</h6></Link>
-          <p className='glyphicon glyphicon-time pt-md-2'>
+          {/* <p className='glyphicon glyphicon-time pt-md-2'>
             on &nbsp;
             <FontAwesomeIcon icon={faClock} /> &nbsp;
             {new Date(currentpost.post_date).getDate()}-{new Date(currentpost.post_date).getUTCMonth()}-{new Date(currentpost.post_date).getFullYear()}
-          </p>
+          </p> */}
         {/* </div> */}
       
     {/* </a> */}
@@ -160,13 +167,16 @@ return (<div className="p-2 p-md-4 shadow mb-3 rounded" key={currentpost.post_id
 
     render(){
         return(
-            <div>
-                <h1 className="text-center text-info shadom"><Link to='/' className='text-decoration-none'>WeBlog</Link></h1>
+            <div className='pt-4'>
+                <h1 className="mb-5 display-4 text-center text-info text-shadow font-weight-bolder" style={{ fontFamily: 'leelawadee UI', textShadow: `2px 2px 4px #000000` }}><Link to='/' className='text-decoration-none'>WeBlog</Link></h1>
                 <div>
-                    <ul className="list-group list-group-horizontal">
+                    <hr />
+                    <ul className="nav nav-pills">
                     { this.state.categories.map(cat => {
                         return(
-                            <li className="list-group-item m-auto"  onClick={()=>{this.deletePost(cat.category)}} key={cat.category_id}><Link to={`/category/${cat.category}`} className='text-danger text-decoration-none'>{cat.category}</Link></li>
+                          <li className='nav-item m-auto' key={cat.category_id}>
+                            <Link to={`/category/${cat.category}`} className='text-info bg-light active text-sm-center nav-link m-auto'>{cat.category}</Link>
+                          </li>
                         )
                     })}
                     </ul>

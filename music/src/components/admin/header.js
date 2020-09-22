@@ -52,7 +52,7 @@ export default class Header extends Component{
         return(
             <div className="bg-info">
                 <Navbar collapseOnSelect bg="dark" variant="dark" expand="md">
-                    <Link to='/' className='nav-link'><Navbar.Brand>BLOG</Navbar.Brand></Link>
+                    <Link to='/' className="nav-link text-shadow font-weight-bolder" style={{ fontFamily: 'leelawadee Ui', textShadow: `2px 2px 4px #000000` }}><Navbar.Brand>BLOG</Navbar.Brand></Link>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="ml-auto" defaultActiveKey={this.state.path}>

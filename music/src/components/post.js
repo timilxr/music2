@@ -9,7 +9,7 @@ import { BrowserRouter as Router,
     useParams } from 'react-router-dom';
     import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { faClock } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import 'react-quill/dist/quill.bubble.css';
@@ -79,7 +79,7 @@ export default class Post extends Component{
         console.log(this.props.match.url);
         return (
             <div>
-              <h1 className="text-center p-2">About Author</h1>
+              <h1 className="text-center p-2 pt-md-4">About Author</h1>
               <div className="text-center">
               <img className='img-responsive img-fluid img-thumbnail rounded' alt={this.state.post_image} src={this.state.pic} />
               </div>
@@ -115,16 +115,19 @@ export default class Post extends Component{
             //                 var id = 'make' +this.state.post_id 
             //                 id  = require(`../images/${image}`);
         return(
-          <div>
-                <h1 className="text-center text-info shadom"><Link to='/' className='text-decoration-none'>WeBlog</Link></h1>
+          <div className='pt-4'>
+                <h1 className="mb-5 display-4 text-center text-info text-shadow font-weight-bolder" style={{ fontFamily: 'leelawadee UI', textShadow: `2px 2px 4px #000000` }}><Link to='/' className='text-decoration-none'>WeBlog</Link></h1>
              <div>
-             <nav className="nav nav-pills flex-column flex-sm-row">
+               <hr />
+             <ul className="nav nav-pills">
                     { this.state.categories.map(cat => {
                         return(
-                            <a className="text-sm-center nav-link m-auto" key={cat.category_id}><Link to={`/category/${cat.category}`} className='text-danger active'>{cat.category}</Link></a>
+                          <li className='nav-item m-auto' key={cat.category_id}>
+                            <Link to={`/category/${cat.category}`} className='text-info bg-light active text-sm-center nav-link m-auto'>{cat.category}</Link>
+                          </li>
                         )
                     })}
-                    </nav>
+                    </ul>
                     <hr />
                 </div>
         
@@ -136,9 +139,14 @@ export default class Post extends Component{
                     <h1 className="pt-md-2 text-capitalize text-center">
                             {this.state.post_title}
                           </h1>
-                          <h4 className="pt-md-2 font-italic text-center">
+                          <h5 className="pt-md-2 font-italic text-center">
                             By: <FontAwesomeIcon icon={faUser} /> {this.state.post_author}
-                          </h4>
+                            &nbsp;&nbsp;
+                            on &nbsp;
+                            <FontAwesomeIcon icon={faCalendarAlt} /> &nbsp;
+                  {new Date(this.state.post_date).getDate()}-{new Date(this.state.post_date).getMonth()}-{new Date(this.state.post_date).getFullYear()} 
+                             
+                          </h5>
                         {/* <div class="col-lg-6 col-md-6 col-6"> */}
                           {/* <div class="row justify-content-center"> */}
                           <div className="text-center">
@@ -156,12 +164,12 @@ export default class Post extends Component{
                       theme={"bubble"}  className='content pt-md-2'
                     />
                           {/* <Link to={`post/${this.state._id}`} className='text-danger'>Read more{" >"}</Link> */}
-                          <p className='glyphicon glyphicon-time pt-md-2'>
+                          {/* <p className='glyphicon glyphicon-time pt-md-2'>
                             on &nbsp;
                             <FontAwesomeIcon icon={faClock} /> &nbsp;
                             {this.state.post_date ? new Date(this.state.post_date).getDate()-new Date(this.state.post_date).getUTCMonth()-new Date(this.state.post_date).getFullYear() : ''}
                              
-                          </p>
+                          </p> */}
                         {/* </div> */}
                       
                     {/* </a> */}

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { faClock } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import 'react-quill/dist/quill.bubble.css';
@@ -83,14 +83,16 @@ export default class Home extends Component{
 
     render(){
         return(
-            <div>
-                <h1 className="text-center text-info shadom"><Link to='/' className='text-decoration-none'>WeBlog</Link></h1>
+            <div className='pt-4'>
+                <h1 className="mb-5 text-center text-info text-shadow font-weight-bolder display-4" style={{ fontFamily: 'leelawadee UI', textShadow: `2px 2px 4px #000000` }}><Link to='/' className='text-decoration-none'>WeBlog</Link></h1>
                 <div>
                     <hr />
-                    <ul className="list-group list-group-horizontal">
+                    <ul className="nav nav-pills">
                     { this.state.categories.map(cat => {
                         return(
-                            <li className="list-group-item mx-auto" key={cat.category_id}><Link to={`/category/${cat.category}`} className='text-danger text-decoration-none'>{cat.category}</Link></li>
+                          <li className='nav-item m-auto' key={cat.category_id}>
+                            <Link to={`/category/${cat.category}`} className='text-info bg-light active text-sm-center nav-link m-auto'>{cat.category}</Link>
+                          </li>
                         )
                     })}
                     </ul>
@@ -114,21 +116,15 @@ export default class Home extends Component{
                             // id  = require(`../../../images/${image}`);
                             // id  = require(`../images/${image}`);
             return (<div className="p-2 p-md-4 row shadow mb-3 rounded" key={currentpost.post_id}>
-                <div className='col-3 pt-3'>
+                <div className='col-md-3 pt-3'>
                 <img width='' height='' className='img-responsive img-fluid img-thumbnail rounded' alt={image} src={id} />
                 </div>
-                    <div className='col-9'>
+                    <div className='col-md-9'>
                         {/* <a href="post.php?p_id=<?php echo $post_id?>"> */}
                     <h3 className="pt-md-2 text-capitalize">
                             {currentpost.post_title}
                           </h3>
-                          <span className="pt-md-2 font-italic mr-3">
-                            <FontAwesomeIcon icon={faUser} /> By {currentpost.post_author}
-                          </span>
-                          <span className='glyphicon glyphicon-time pt-md-2'>
-                          <FontAwesomeIcon icon={faClock} />&nbsp;
-                            {new Date(currentpost.post_date).getDate()}-{new Date(currentpost.post_date).getMonth()}-{new Date(currentpost.post_date).getFullYear()}
-                          </span>
+                          
                         {/* <div class="col-lg-6 col-md-6 col-6"> */}
                           {/* <div class="row justify-content-center"> */}
                             
@@ -144,8 +140,15 @@ export default class Home extends Component{
                         readOnly={true}
                         theme={"bubble"} className='glyphicon glyphicon-time pt-md-2'
                         />
-                          
+                          <span className="pt-md-2 font-italic mr-3">
+                            <FontAwesomeIcon icon={faUser} /> By {currentpost.post_author}
+                          </span>
+                          <span className='glyphicon glyphicon-time pt-md-2'>
+                          <FontAwesomeIcon icon={faCalendarAlt} />&nbsp;
+                            {new Date(currentpost.post_date).getDate()}-{new Date(currentpost.post_date).getMonth()}-{new Date(currentpost.post_date).getFullYear()}
+                          </span>
                           <Link to={`/post/${currentpost._id}`} className='text-danger'><h6>Read more{" >"}</h6></Link>
+                          
                         {/* </div> */}
                       
                     {/* </a> */}
