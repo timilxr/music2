@@ -34,7 +34,7 @@ export default class Post extends Component{
     componentDidMount(){
         axios.get('/posts/single/'+ this.props.match.params.topicId)
         .then(response => {
-            const Fpic = require(`../../../images/${response.data.post_image}`);
+            const Fpic = `http://localhost:5001/${response.data.post_image}`;
             this.setState({
                 post_title: response.data.post_title,
                 post_author: response.data.post_author,
@@ -80,8 +80,9 @@ export default class Post extends Component{
         return (
             <div>
               <h1 className="text-center p-2">About Author</h1>
-              <img width='' height='' className='img-responsive img-fluid img-thumbnail' alt={this.state.post_image} src={this.state.pic} />
-
+              <div className="text-center">
+              <img className='img-responsive img-fluid img-thumbnail rounded' alt={this.state.post_image} src={this.state.pic} />
+              </div>
         
               <ul>
                 <li>
@@ -140,7 +141,7 @@ export default class Post extends Component{
                           </h4>
                         {/* <div class="col-lg-6 col-md-6 col-6"> */}
                           {/* <div class="row justify-content-center"> */}
-                            <img width='' height='' className='img-responsive img-fluid img-thumbnail' alt={this.state.post_image} src={this.state.pic} />
+                            <img width='' height='' className='img-responsive img-fluid img-thumbnail mx-auto d-block rounded' alt={this.state.post_image} src={this.state.pic} />
                           {/* </div> */}
                         {/* </div>
                         <div className="col-lg-6 col-md-6 col-6 text-center"> */}
@@ -183,8 +184,8 @@ export default class Post extends Component{
                                 </div>
                { this.state.posts.map(post => {
                  var image = post.post_image;
-                 var id = '';
-                  id  = require(`../../../images/${image}`);
+                 var id = `http://localhost:5001/${image}`;
+                  // id  = require(`../../../images/${image}`);
                         return(
                           // <div>
                             <div className="carousel-item" key={post.post_id}>

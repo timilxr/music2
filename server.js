@@ -11,9 +11,9 @@ const port = process.env.PORT || 5001;
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'images')))
+app.use(express.static("images"));
 // ... hosting
-app.use(express.static(path.join(__dirname, "music", "build")))
+app.use(express.static(path.join(__dirname, "music", "build")));
 
 // const uri = process.env.ATLAS_URI;
 const uri = process.env.DBhost || process.env.ATLAS_URI;

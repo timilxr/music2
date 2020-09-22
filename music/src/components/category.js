@@ -21,19 +21,6 @@ export default class Category extends Component{
     }
 
     componentDidMount(){
-        axios.get('/posts/category/'+ this.props.match.params.catId)
-        .then(response => {
-            console.log(this.props.match.params.catId);
-            // const Fpic = require(`../images/${response.data.post_image}`);
-            this.setState({
-                posts: response.data
-            });
-            console.log(response.data[0]);
-            // alert("timi");
-            // alert(response.data);
-        })
-        .catch((error) => console.log(error));
-
         axios.get('/categories/')
         .then(response => {
             this.setState({
@@ -47,6 +34,18 @@ export default class Category extends Component{
             this.setState({
                 authors: response.data
             });
+            // alert(response.data);
+        })
+        .catch((error) => console.log(error));
+        axios.get('/posts/category/'+ this.props.match.params.catId)
+        .then(response => {
+            // console.log(this.props.match.params.catId);
+            // const Fpic = require(`../images/${response.data.post_image}`);
+            this.setState({
+                posts: response.data
+            });
+            // console.log(response.data[0]);
+            // alert("timi");
             // alert(response.data);
         })
         .catch((error) => console.log(error));
@@ -84,12 +83,12 @@ export default class Category extends Component{
     render(){
         return(
             <div>
-                <h1 className="text-center text-info shadom"><Link to='/' className='text-decoration-none'>FIRST--BlOG</Link></h1>
+                <h1 className="text-center text-info shadom"><Link to='/' className='text-decoration-none'>WeBlog</Link></h1>
                 <div>
                     <ul className="list-group list-group-horizontal">
                     { this.state.categories.map(cat => {
                         return(
-                            <li className="list-group-item m-auto"  onClick={()=>{this.deletePost(cat.category)}} key={cat.category_id}><Link to={`/category/${cat.category}`} className='text-danger'>{cat.category}</Link></li>
+                            <li className="list-group-item m-auto"  onClick={()=>{this.deletePost(cat.category)}} key={cat.category_id}><Link to={`/category/${cat.category}`} className='text-danger text-decoration-none'>{cat.category}</Link></li>
                         )
                     })}
                     </ul>
@@ -110,7 +109,7 @@ export default class Category extends Component{
                             const image = currentpost.post_image;
                            
                             var id = 'make' +currentpost.post_id 
-                            id  = require(`../../../images/${image}`);
+                            id  = `http://localhost:5001/${image}`;
             return (<div className="p-2 p-md-4 shadow mb-3 rounded" key={currentpost.post_id}>
                     {/* <a href="post.php?p_id=<?php echo $post_id?>"> */}
                     <h3 className="pt-md-2 text-capitalize">
@@ -121,7 +120,7 @@ export default class Category extends Component{
                           </h6>
                         {/* <div class="col-lg-6 col-md-6 col-6"> */}
                           {/* <div class="row justify-content-center"> */}
-                            <img width='' height='' className='img-responsive img-fluid img-thumbnail' alt={image} src={id} />
+                            <img width='' height='' className='img-responsive img-fluid img-thumbnail mx-auto d-block' alt={image} src={id} />
                           {/* </div> */}
                         {/* </div>
                         <div className="col-lg-6 col-md-6 col-6 text-center"> */}

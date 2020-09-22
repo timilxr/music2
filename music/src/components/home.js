@@ -84,13 +84,13 @@ export default class Home extends Component{
     render(){
         return(
             <div>
-                <h1 className="text-center text-info shadom"><Link to='/' className='text-decoration-none'>FIRST--BlOG</Link></h1>
+                <h1 className="text-center text-info shadom"><Link to='/' className='text-decoration-none'>WeBlog</Link></h1>
                 <div>
                     <hr />
                     <ul className="list-group list-group-horizontal">
                     { this.state.categories.map(cat => {
                         return(
-                            <li className="list-group-item mx-auto" key={cat.category_id}><Link to={`/category/${cat.category}`} className='text-danger'>{cat.category}</Link></li>
+                            <li className="list-group-item mx-auto" key={cat.category_id}><Link to={`/category/${cat.category}`} className='text-danger text-decoration-none'>{cat.category}</Link></li>
                         )
                     })}
                     </ul>
@@ -110,12 +110,12 @@ export default class Home extends Component{
                         { this.state.posts.map(currentpost => {
                             const image = currentpost.post_image;
                            
-                            var id = `http://localhost:5001/images/${image}`;
-                            id  = require(`../../../images/${image}`);
+                            var id = `http://localhost:5001/${image}`;
+                            // id  = require(`../../../images/${image}`);
                             // id  = require(`../images/${image}`);
             return (<div className="p-2 p-md-4 row shadow mb-3 rounded" key={currentpost.post_id}>
                 <div className='col-3 pt-3'>
-                <img width='' height='' className='img-responsive img-fluid img-thumbnail' alt={image} src={id} />
+                <img width='' height='' className='img-responsive img-fluid img-thumbnail mx-auto d-block rounded' alt={image} src={id} />
                 </div>
                     <div className='col-9'>
                         {/* <a href="post.php?p_id=<?php echo $post_id?>"> */}
