@@ -34,7 +34,7 @@ export default class Post extends Component{
     componentDidMount(){
         axios.get('/posts/single/'+ this.props.match.params.topicId)
         .then(response => {
-            const Fpic = `http://localhost:5001/${response.data.post_image}`;
+            const Fpic = `/${response.data.post_image}`;
             this.setState({
                 post_title: response.data.post_title,
                 post_author: response.data.post_author,
@@ -186,7 +186,7 @@ export default class Post extends Component{
                                 </div>
                { this.state.posts.map(post => {
                  var image = post.post_image;
-                 var id = `http://localhost:5001/${image}`;
+                 var id = `/${image}`;
                   // id  = require(`../../../images/${image}`);
                         return(
                           // <div>

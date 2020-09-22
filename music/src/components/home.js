@@ -110,7 +110,7 @@ export default class Home extends Component{
                         { this.state.posts.map(currentpost => {
                             const image = currentpost.post_image;
                            
-                            var id = `http://localhost:5001/${image}`;
+                            var id = `/${image}`;
                             // id  = require(`../../../images/${image}`);
                             // id  = require(`../images/${image}`);
             return (<div className="p-2 p-md-4 row shadow mb-3 rounded" key={currentpost.post_id}>

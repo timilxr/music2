@@ -109,7 +109,7 @@ export default class Category extends Component{
                             const image = currentpost.post_image;
                            
                             var id = 'make' +currentpost.post_id 
-                            id  = `http://localhost:5001/${image}`;
+                            id  = `/${image}`;
             return (<div className="p-2 p-md-4 shadow mb-3 rounded" key={currentpost.post_id}>
                     {/* <a href="post.php?p_id=<?php echo $post_id?>"> */}
                     <h3 className="pt-md-2 text-capitalize">
