@@ -120,7 +120,7 @@ export default class Category extends Component{
                           </h6>
                         {/* <div class="col-lg-6 col-md-6 col-6"> */}
                           {/* <div class="row justify-content-center"> */}
-                            <img width='' height='' className='img-responsive img-fluid img-thumbnail mx-auto d-block' alt={image} src={id} />
+                            <img width='' height='' className='img-responsive img-fluid img-thumbnail' alt={image} src={id} />
                           {/* </div> */}
                         {/* </div>
                         <div className="col-lg-6 col-md-6 col-6 text-center"> */}

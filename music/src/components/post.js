@@ -141,7 +141,9 @@ export default class Post extends Component{
                           </h4>
                         {/* <div class="col-lg-6 col-md-6 col-6"> */}
                           {/* <div class="row justify-content-center"> */}
-                            <img width='' height='' className='img-responsive img-fluid img-thumbnail mx-auto d-block rounded' alt={this.state.post_image} src={this.state.pic} />
+                          <div className="text-center">
+                          <img width='' height='' className='img-responsive img-fluid img-thumbnail rounded' alt={this.state.post_image} src={this.state.pic} />
+                          </div>
                           {/* </div> */}
                         {/* </div>
                         <div className="col-lg-6 col-md-6 col-6 text-center"> */}

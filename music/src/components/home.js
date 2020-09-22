@@ -115,7 +115,7 @@ export default class Home extends Component{
                             // id  = require(`../images/${image}`);
             return (<div className="p-2 p-md-4 row shadow mb-3 rounded" key={currentpost.post_id}>
                 <div className='col-3 pt-3'>
-                <img width='' height='' className='img-responsive img-fluid img-thumbnail mx-auto d-block rounded' alt={image} src={id} />
+                <img width='' height='' className='img-responsive img-fluid img-thumbnail rounded' alt={image} src={id} />
                 </div>
                     <div className='col-9'>
                         {/* <a href="post.php?p_id=<?php echo $post_id?>"> */}
