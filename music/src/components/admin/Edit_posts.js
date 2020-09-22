@@ -77,7 +77,7 @@ export default class EditPost extends Component{
     componentDidMount(){
         axios.get('/posts/single/'+this.props.match.params.id)
         .then(res => {
-        const jack = require(`../../../../images/${res.data.post_image}`);
+        const jack = `/${res.data.post_image}`;
             this.setState({
                 post_title: res.data.post_title,
                 post_category: res.data.post_category,
