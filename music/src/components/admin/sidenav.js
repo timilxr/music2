@@ -77,7 +77,7 @@ export default class Sidenav extends Component{
                                     &nbsp;&nbsp;Categories</Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Link to='/admin/categories' className='nav-link mt-3'>
+                                <Link to='/admin/add_user' className='nav-link mt-3'>
                                 <i className="fas fa-user-plus"></i>
                                     &nbsp;&nbsp;Add User</Link>
                             </Nav.Item>

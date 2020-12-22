@@ -162,7 +162,7 @@ export default class AddPost extends Component{
         console.log(formdata);
         
         axios.post('/posts/add', formdata, config)
-        .then(res => {console.log(res.data);alert("The file is successfully uploaded. New Post Added.");})
+        .then(res => {console.log(res.data);alert("The file is successfully uploaded. New Post Added.");window.location = '/admin/view_posts';})
         .catch(err => alert('err: ' + err));
 
     }

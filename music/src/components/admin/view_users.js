@@ -26,7 +26,8 @@ export default class ViewUser extends Component{
 
         this.deleteUser = this.deleteUser.bind(this);
 
-        this.state = { posts: [] };
+        this.state = { posts: [],
+        category: props.category };
     }
 
     componentDidMount(){
@@ -54,6 +55,8 @@ export default class ViewUser extends Component{
     // }
 
     render(){
+        const category = this.state;
+       if(category === 'Admin'){
         return(
             <div>
                 <h3>Saved Posts</h3>
@@ -90,5 +93,12 @@ export default class ViewUser extends Component{
                 </Table>
             </div>
         )
+       } else {
+            return(
+                <div>
+                    <h1>Only Admins Can View Users</h1>
+                </div>
+            )
+       }
     }
 }

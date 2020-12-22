@@ -10,6 +10,7 @@ import Dashboard from './dashboard';
 import AddPost from './add_post';
 import ViewPost from './view_post';
 import ViewUser from './view_users';
+import AddUser from './Add_user';
 import EditPost from './Edit_posts';
 import AddCategory from './add_category';
 import Profile from './Profile';
@@ -25,6 +26,7 @@ export default class Header extends Component{
             path: props.path,
             name: props.user,
             mail: props.mail,
+            category: props.category,
             redirect: false
         };
         console.log(this.state.mail);
@@ -47,7 +49,7 @@ export default class Header extends Component{
     }
 
     render(){
-        const {name, mail} = this.state;
+        const {name, mail, category} = this.state;
         // console.log(name);
         return(
             <div className="bg-info">
@@ -88,8 +90,9 @@ export default class Header extends Component{
                                 <Route path='/admin/dashboard' component={Dashboard} />
                                 <Route path='/admin/add_post' render={(props)=>(<AddPost name={name} mail={mail}/>)} />
                                 <Route path='/admin/profile' render={(props)=>(<Profile name={name} mail={mail}/>)} />
-                                <Route path='/admin/view_posts' render={(props)=>(<ViewPost name={name} mail={mail}/>)} />
-                                <Route path='/admin/users' component={ViewUser} />
+                                <Route path='/admin/view_posts' render={(props)=>(<ViewPost name={name} mail={mail} category={category}/>)} />
+                                <Route path='/admin/users' render = {(props)=>(<ViewUser category={category} />)}/>
+                                <Route path='/admin/add_user' render = {(props)=>(<AddUser category={category} />)}/>
                                 <Route path='/admin/Edit_post/:id' component={EditPost} />
                                 <Route path='/admin/categories' component={AddCategory} />
                             </Switch>
