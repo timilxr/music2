@@ -14,6 +14,7 @@ import AddUser from './Add_user';
 import EditPost from './Edit_posts';
 import AddCategory from './add_category';
 import Profile from './Profile';
+import EditUser from './Edit_user';
 import {Redirect} from 'react-router-dom';
 
 export default class Header extends Component{
@@ -29,7 +30,6 @@ export default class Header extends Component{
             category: props.category,
             redirect: false
         };
-        console.log(this.state.mail);
     }
 
     renderRedirect = () => {
@@ -94,6 +94,7 @@ export default class Header extends Component{
                                 <Route path='/admin/users' render = {(props)=>(<ViewUser category={category} />)}/>
                                 <Route path='/admin/add_user' render = {(props)=>(<AddUser category={category} />)}/>
                                 <Route path='/admin/Edit_post/:id' component={EditPost} />
+                                <Route path='/admin/edit_user/:id' component={EditUser}/>
                                 <Route path='/admin/categories' component={AddCategory} />
                             </Switch>
                             {/* </Router> */}

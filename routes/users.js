@@ -57,7 +57,7 @@ router.route('/update/:id').post((req, res)=>{
         user.date = new Date();
 
         user.save()
-        .then(()=>res.json(`user${firstname} updated`))
+        .then(()=>res.json(`user ${firstname} updated`))
         .catch(err => res.status(400).json('Error: '+err))
     })
     .catch(err => res.status(400).json('Error: '+err))
@@ -140,7 +140,7 @@ router.route('/verify/:token').get((req, res)=>{
             .then(persons=>{
                 const person = persons[0];
             const user = users[0];
-            res.json({success: true, message: 'not deleted', token: user.token, mail: person.email, user: person.firstname+" "+person.lastname});
+            res.json({success: true, message: 'not deleted', token: user.token, mail: person.email, category: person.category, user: person.firstname+" "+person.lastname});
         })
         .catch(err => res.status(400).json('Error: '+ err))
         }

@@ -55,7 +55,7 @@ export default class ViewUser extends Component{
     // }
 
     render(){
-        const category = this.state;
+        const {category} = this.state;
        if(category === 'Admin'){
         return(
             <div>
@@ -79,7 +79,7 @@ export default class ViewUser extends Component{
                         <td>{currentpost.email}</td>
                         <td>{currentpost.date.substring(0,10)}</td>
                         <td>
-                            <Link to={'/admin/Edit_post/'+currentpost._id}>
+                            <Link to={'/admin/edit_user/'+currentpost._id}>
                                 <Button variant="outline-primary">Edit</Button>{' '}
                             </Link>
                         </td>

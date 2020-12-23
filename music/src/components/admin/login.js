@@ -10,7 +10,6 @@ import Header from './header';
 export default class Login extends Component {
     constructor(props){
         super(props);
-        console.log(props.match.url);
         this.state ={
             link: props.match.url,
             path: props.match.path,
@@ -48,7 +47,6 @@ export default class Login extends Component {
 
         if(obj && obj.token){
             const {token} = obj;
-            console.log(token);
             axios.get('/users/verify/'+ token)
             .then(res=>{
                 // console.log(res.data.message);
@@ -252,7 +250,6 @@ export default class Login extends Component {
                 category
                 // redirect
              } = this.state;
-             console.log(this.state.mail);
         if (isLoading){
             return(<div><p>Loading...</p></div>);
         }
