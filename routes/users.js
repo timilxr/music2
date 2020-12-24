@@ -47,20 +47,24 @@ router.route('/:id').delete((req, res)=>{
 
 router.route('/update/:id').post((req, res)=>{
 
-    newUser.findById(req.params.id)
+    User.findById(req.params.id)
     .then(user => {
+        console.log(req.body);
+        if(req.body.passType === 'New Password'){
+            user.password = req.body.password.generateHash(password);
+        }
         user.firstname = req.body.firstname;
         user.lastname = req.body.lastname;
         user.email = req.body.email.toLowerCase();
-        user.password = req.body.password.generateHash(password);
         user.category = req.body.category;
         user.date = new Date();
+        console.log(user);
 
         user.save()
-        .then(()=>res.json(`user ${firstname} updated`))
-        .catch(err => res.status(400).json('Error: '+err))
+        .then(()=>res.json(`user ${user.firstname} updated`))
+        .catch(err => {res.status(400).json('Error Occured Please try again'); console.log(err);});
     })
-    .catch(err => res.status(400).json('Error: '+err))
+    .catch(err => res.status(400).json('Error: '+err));
 });
 
 router.route('/update_profile/:email').post((req, res)=>{

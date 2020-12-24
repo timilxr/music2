@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import { getFromStorage, setInStorage } from '../../utils/storage';
 
 export default class EditUser extends Component{
     constructor(props){
@@ -13,7 +14,8 @@ export default class EditUser extends Component{
             isLoading: false,
             status: '',
             msg: '',
-            userType: props.category
+            userType: '',
+            PassType: ''
         };
 
         this.onChangeFirstname = this.onChangeFirstname.bind(this);
@@ -21,16 +23,24 @@ export default class EditUser extends Component{
         this.onChangeEmail = this.onChangeEmail.bind(this);
         this.onChangePassword = this.onChangePassword.bind(this);
         this.onChangeCategory = this.onChangeCategory.bind(this);
+        this.onChangePassType = this.onChangePassType.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.addUser = this.addUser.bind(this);
     }
 
     componentDidMount(){
-        console.log(this.props);
         this.setState({
             isLoading: true
         });
-        axios.get(`/users/${this.props.match.params.id}`)
+        const obj = getFromStorage('the_main_app');
+        // if(obj && obj.token){
+            const {token} = obj;
+            axios.get('/users/verify/'+ token)
+            .then(res=>{
+                this.setState({
+                    userType: res.data.category
+                });
+                axios.get(`/users/${this.props.match.params.id}`)
         .then(res=>{
             this.setState({
                 isLoading: false,
@@ -48,6 +58,11 @@ export default class EditUser extends Component{
                 msg: err
             });
         });
+            })
+            .catch(err=>{
+                console.log(err);
+            });
+
     }
 
     onChangeFirstname(e){
@@ -58,6 +73,11 @@ export default class EditUser extends Component{
     onChangeLastname(e){
         this.setState({
             Lastname: e.target.value
+        });
+    }
+    onChangePassType(e){
+        this.setState({
+            PassType: e.target.value
         });
     }
     onChangeCategory(e){
@@ -76,18 +96,19 @@ export default class EditUser extends Component{
         });
     }
     onSubmit(e){
-        // e.preventDefault();
+        e.preventDefault();
     }
     addUser(){
         this.setState({
             isLoading: true
         });
-        const {Firstname, Lastname, Email, Password, Category} = this.state;
+        const {Firstname, Lastname, Email, Password, PassType, Category} = this.state;
         console.log(this.state);
         axios.post(`/users/update/${this.props.match.params.id}`,{
             firstname: Firstname, 
             lastname: Lastname, 
             email: Email, 
+            passType: PassType,
             password: Password, 
             category: Category})
         .then(res=>{
@@ -102,22 +123,24 @@ export default class EditUser extends Component{
             this.setState({
                 isLoading: false,
                 status: 'alert-danger',
-                msg: err
+                msg: 'An Error has occured Please try again'
             });
         });
     }
 
 
     render(){
-        const {Firstname, Lastname, Email, Password, Category, status, msg, isLoading, userType} = this.state;
+        const {Firstname, Lastname, Email, Password, PassType, Category, status, msg, isLoading, userType} = this.state;
         if(isLoading){
             return(
                 <h1>Loading... Please be patient</h1>
-            )
-        } else if(userType === 'Admin'){
+            );
+        } else {
+            if(userType === 'Admin'){
             return(
                 <div>
                     <h1>Add Users</h1>
+                    {userType}
                     <div className={`alert ${status}`} role='alert'>
                         {msg}
                     </div>
@@ -141,20 +164,31 @@ export default class EditUser extends Component{
                             <label htmlFor='email'><h5>Email</h5></label>
                             <input type='email' name='email' className='form-control' value={Email} onChange={this.onChangeEmail} placeholder='email@gmail.com' required />
                         </div>
-                        <div className='form-group'>
-                            <label htmlFor='password'><h5>Password</h5></label>
-                            <input type='password' name='password' className='form-control' value={Password} onChange={this.onChangePassword} placeholder='Password' required />
+                        <div className='form-group row'>
+                            <label htmlFor='password' className='col-12'><h5>Password</h5></label>
+                            <div className='col-md-6'>
+                                <input type='password' name='password' className='form-control' value={Password} onChange={this.onChangePassword} placeholder='Password' required />
+                            </div>
+                            <div className='col-md-6'>
+                                <select name='password' className='form-control col-md-6' value={PassType} onChange={this.onChangePassType} required>
+                                    <option value='New Password'>New Password</option>
+                                    <option value='Same Password'>Same Password</option>
+                                </select>
+                            </div>
                         </div>
                         <div className='form-group'>
-                            <button type='button' className='btn btn-primary btn-block' onClick={this.addUser}><h5>Add User</h5></button>
+                            <button type='button' className='btn btn-primary btn-block' onClick={this.addUser}><h5>Edit User</h5></button>
                         </div>
                     </form>
                 </div>
-            )
+            );
         } else {
             return(
                 <h1>Only Admins Can Add New Users</h1>
-            )
-        }
+            );}
+        // } else if(userType !== 'Subscriber' && userType !== 'Admin'){
+        //     return(<h1>Strange userType</h1>);
+        // }
+    }
     }
 }

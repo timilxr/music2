@@ -9,6 +9,7 @@ import Home from './components/home';
 import Post from './components/post';
 import Category from './components/category';
 import Author from './components/author';
+import About from './components/about';
 // import SideNav from './components/sidenav';
 // import AddPost from './components/add_post';
 
@@ -20,6 +21,7 @@ function App() {
     <Switch>
       <Route path='/admin' component={Login} />
       <Route exact path='/' component={Home} />
+      <Route exact path='/about_us' component={About} />
       <Route exact path='/post/:topicId' component={Post} />
       {/* <Route exact path='/side' component={SideNav} /> */}
       <Route exact path='/category/:catId' component={Category} />
@@ -37,6 +39,9 @@ function App() {
                         Copyright © {new Date().getFullYear()} Throne of Gamers
                         <br />
                         <Link to="/admin" className='text-danger text-decoration-none'>Admin</Link>
+                        <p>
+                        <Link to="/about_us" className='text-danger text-decoration-none'>About Us</Link>
+                        </p>
                         </div>
                     </div>
             

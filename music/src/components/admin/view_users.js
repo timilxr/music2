@@ -66,6 +66,7 @@ export default class ViewUser extends Component{
                             <th>Firstname</th>
                             <th>Lastname</th>
                             <th>Email</th>
+                            <th>Category</th>
                             <th>Date</th>
                             <th>&nbsp;</th>
                             <th>&nbsp;</th>
@@ -77,6 +78,7 @@ export default class ViewUser extends Component{
                         <td>{currentpost.firstname}</td>
                         <td>{currentpost.lastname}</td>
                         <td>{currentpost.email}</td>
+                        <td>{currentpost.category}</td>
                         <td>{currentpost.date.substring(0,10)}</td>
                         <td>
                             <Link to={'/admin/edit_user/'+currentpost._id}>
