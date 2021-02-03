@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import ReactQuill from 'react-quill';
-// import { Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 
 
 export default class Category extends Component{

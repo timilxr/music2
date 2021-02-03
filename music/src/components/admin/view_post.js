@@ -123,7 +123,7 @@ export default class ViewPost extends Component{
         }) }
                     </tbody>
                 </Table>
-                <h2>{this.state.posts.length == 0? 'You don\'t have any posts yet, kindly upload new posts': ''}</h2>
+                <h2>{this.state.posts.length === 0? 'You don\'t have any posts yet, kindly upload new posts': ''}</h2>
             </div>
         )
     }

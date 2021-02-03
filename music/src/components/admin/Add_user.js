@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import { faDivide } from '@fortawesome/free-solid-svg-icons';
+// import { faDivide } from '@fortawesome/free-solid-svg-icons';
 
 export default class AddUser extends Component{
     constructor(props){

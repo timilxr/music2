@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import { getFromStorage, setInStorage } from '../../utils/storage';
+import { getFromStorage } from '../../utils/storage';
 
 export default class EditUser extends Component{
     constructor(props){

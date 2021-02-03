@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
 import {Card} from 'react-bootstrap';
-import Category from '../category';
+// import Category from '../category';
 // import Sidenav from './sidenav';
 // import Header from './header';
 // import Footer from './footer';

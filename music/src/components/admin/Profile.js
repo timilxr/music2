@@ -190,19 +190,19 @@ export default class Profile extends Component{
         // const {info} = this.state;
         // const email = info.email;
         // console.log(info[0].email);
-        const {
-            signUpError,
-            signUpFirstname,
-            signUpLastname,
-            signUpEmail,
-            signUpPassword,
+        // const {
+            // signUpError,
+            // signUpFirstname,
+            // signUpLastname,
+            // signUpEmail,
+            // signUpPassword,
             // redirect
-         } = this.state;
+        //  } = this.state;
 
         return(
             <div>
                 <div className="card mx-auto" style={{width: 50 +'%'}}>
-                <img className="card-img-top img-fluid" src=".../100px180/?text=Image cap" alt="Card image cap" />
+                <img className="card-img-top img-fluid" src=".../100px180/?text=Image cap" alt={this.props.name} />
                 <div className="card-body text-center">
                     <h3 className="card-title text-capitalize">{this.props.name}</h3>
                     <h5 className="card-subtitle text-capitalize">{this.state.category}</h5>

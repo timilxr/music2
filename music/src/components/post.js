@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import './post.css';
-import { BrowserRouter as Router,
+import { 
+    // BrowserRouter as Router,
+    // useRouteMatch,
+    // useParams
     Switch,
     Route,
-    Link,
-    // useRouteMatch,
-    useParams } from 'react-router-dom';
+    Link } from 'react-router-dom';
     import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
