@@ -142,11 +142,16 @@ return (<div  key={currentpost.post_id}>
         </div>
         <hr />
     </div>
-    <div class="col-12">
-        <div className="card shadow mb-3 rounded d-block d-sm-none">
+    <div className="col-12">
+        <div className="card shadow-sm mb-3 rounded d-block d-sm-none">
         <img className='img-responsive img-fluid rounded card-img-top' alt={image} src={id} />
             <div className="card-body">
-                <h5 className="card-title" style={{fontFamily: 'YellowTail'}}>{currentpost.post_title}</h5>
+                <h5 className="card-title mb-0 pb-0" style={{fontFamily: 'YellowTail'}}>{currentpost.post_title}</h5>
+                <span className="card-title pt-md-2 font-italic my-0 pt-0" style={{fontFamily: 'Tisa Sans Pro Bold', fontSize: 3.5 + 'vw'}}>
+                            {/* <h6> */}
+                                <FontAwesomeIcon icon={faUser} /> By {currentpost.post_author}
+                            {/* </h6> */}
+                        </span>
                 <p className="card-text">
                     <ReactQuill
                     value={currentpost.post_content.substring(0, 800)}
@@ -157,12 +162,8 @@ return (<div  key={currentpost.post_id}>
             </div>
             <div className="card-footer px-2">
                 <div className="row py-0">
-                    <div className="col-md-8 col-8 py-0 my-0">
-                        <span className="pt-md-2 font-italic my-0 h6 mr-1" style={{fontFamily: 'Tisa Sans Pro Bold'}}>
-                            {/* <h6> */}
-                                <FontAwesomeIcon icon={faUser} /> By {currentpost.post_author}
-                            {/* </h6> */}
-                        </span>
+                    <div className="col-6 py-0 my-0">
+                        
                         <span className='glyphicon glyphicon-time pt-md-2 h6 pl-1' style={{fontFamily: 'Tisa Sans Pro Bold'}}>
                             {/* <p className="h6"> */}
                                 <FontAwesomeIcon icon={faCalendarAlt} />&nbsp;
@@ -170,7 +171,7 @@ return (<div  key={currentpost.post_id}>
                             {/* </p> */}
                         </span>
                     </div>
-                    <div className="col-md-4 col-4 px-md-3 pl-0">
+                    <div className="col-6 px-md-3 pl-auto">
                         <Link to={`/post/${currentpost._id}`} className='text-danger text-rigth ml-auto'>
                             <Button variant="outline-primary" size="sm" className="text-right">
                                 <h6 className="my-0">
@@ -222,7 +223,7 @@ return (<div  key={currentpost.post_id}>
                     <ul className="nav nav-pills">
                     { this.state.categories.map(cat => {
                         return(
-                          <li className='nav-item m-auto' key={cat.category_id}>
+                            <li className='nav-item text-center m-auto m-md-auto p-1' key={cat.category_id}>
                             <Link to={`/category/${cat.category}`} className='text-info bg-light active text-sm-center nav-link m-auto'>{cat.category}</Link>
                           </li>
                         )
