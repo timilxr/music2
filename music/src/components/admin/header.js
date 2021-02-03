@@ -52,8 +52,8 @@ export default class Header extends Component{
         const {name, mail, category} = this.state;
         // console.log(name);
         return(
-            <div className="bg-info">
-                <Navbar collapseOnSelect bg="dark" variant="dark" expand="md">
+            <div className="bg-info rounded">
+                <Navbar collapseOnSelect bg="dark" variant="dark" expand="md" className="rounded">
                     <Link to='/' className="nav-link text-shadow font-weight-bolder" style={{ fontFamily: 'leelawadee Ui', textShadow: `2px 2px 4px #000000` }}><Navbar.Brand>BLOG</Navbar.Brand></Link>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
@@ -86,8 +86,8 @@ export default class Header extends Component{
                             {/* <Router> */}
                             {/* { this.renderRedirect() } */}
                             <Switch>
-                            <Route exact path='/admin' component={Dashboard} />
-                                <Route path='/admin/dashboard' component={Dashboard} />
+                            <Route exact path='/admin' render={(props)=>(<Dashboard category={category} name={name}/>)} />
+                                <Route path='/admin/dashboard' render={(props)=>(<Dashboard category={category} name={name}/>)} />
                                 <Route path='/admin/add_post' render={(props)=>(<AddPost name={name} mail={mail}/>)} />
                                 <Route path='/admin/profile' render={(props)=>(<Profile name={name} mail={mail}/>)} />
                                 <Route path='/admin/view_posts' render={(props)=>(<ViewPost name={name} mail={mail} category={category}/>)} />
@@ -95,7 +95,7 @@ export default class Header extends Component{
                                 <Route path='/admin/add_user' render = {(props)=>(<AddUser category={category} />)}/>
                                 <Route path='/admin/Edit_post/:id' component={EditPost} />
                                 <Route path='/admin/edit_user/:id' component={EditUser}/>
-                                <Route path='/admin/categories' component={AddCategory} />
+                                <Route path='/admin/categories' render = {(props)=>(<AddCategory category={category}/>)}/>
                             </Switch>
                             {/* </Router> */}
 

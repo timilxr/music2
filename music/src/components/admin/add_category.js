@@ -14,7 +14,8 @@ export default class AddCategory extends Component{
 
         this.state={
             post_category: '',
-            post_categories: []
+            post_categories: [],
+            user_cat: props.category
         }
     }
     componentDidMount(){
@@ -98,12 +99,12 @@ export default class AddCategory extends Component{
                             <td>{currentpost.category_id}</td>
                             <td>{currentpost.category}</td>
                             <td>
-                                <Link to={'/admin/Edit_post/'+currentpost._id}>
+                                {this.state.user_cat === 'Admin'? `<Link to={'/admin/Edit_post/'+currentpost._id}>
                                     <Button variant="outline-primary">Edit</Button>{' '}
-                                </Link>
+                                </Link>`: ''}
                             </td>
                             <td>
-                                <Button variant="outline-danger" onClick={()=>{this.deletePost(currentpost._id)}}>Delete</Button>{' '}
+                                {this.state.user_cat === 'Admin'? `<Button variant="outline-danger" onClick={()=>{this.deletePost(currentpost._id)}}>Delete</Button>{' '}`: ''}
                             </td>
                         </tr>
                 

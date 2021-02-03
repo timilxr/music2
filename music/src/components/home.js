@@ -7,7 +7,7 @@ import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import 'react-quill/dist/quill.bubble.css';
-// import { Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 
 
 export default class Home extends Component{
@@ -65,11 +65,11 @@ export default class Home extends Component{
     }
 
     authors(){
-        return(<div className='d-flex flex-wrap'>
+        return(<div className='d-block py-4'>
         {/* <ul className="list-group list-group-horizontal mx-auto"> */}
             {this.state.authors.map(author =>{
                 const fullname = author.firstname + ' ' + author.lastname;
-            return(<div className='px-2 bd-highlight text-capitalize'  key={author._id}><Link to={`/author/${fullname}`} className='text-decoration-none'>{fullname}</Link></div>);
+            return(<div className='px-2 bd-highlight text-capitalize' style={{fontFamily: 'Ubuntu'}}  key={author._id}><Link to={`/author/${fullname}`} className='text-decoration-none'><b><i>{fullname}</i></b></Link></div>);
             })
             }
        {/* </ul> */}
@@ -113,52 +113,95 @@ export default class Home extends Component{
                             const image = currentpost.post_image;
                            
                             var id = `/${image}`;
-                            // id  = require(`../../../images/${image}`);
-                            // id  = require(`../images/${image}`);
-            return (<div className="p-2 p-md-4 row shadow mb-3 rounded" key={currentpost.post_id}>
-                <div className='col-md-3 pt-3'>
-                <img width='' height='' className='img-responsive img-fluid img-thumbnail rounded' alt={image} src={id} />
-                </div>
-                    <div className='col-md-9'>
-                        {/* <a href="post.php?p_id=<?php echo $post_id?>"> */}
-                    <h3 className="pt-md-2 text-capitalize">
-                            {currentpost.post_title}
-                          </h3>
-                          
-                        {/* <div class="col-lg-6 col-md-6 col-6"> */}
-                          {/* <div class="row justify-content-center"> */}
-                            
-                          {/* </div> */}
-                        {/* </div>
-                        <div className="col-lg-6 col-md-6 col-6 text-center"> */}
-                        {/* <div dangerouslySetInnerHTML={{__html: currentpost.post_content.substring(0, 400)}} className='glyphicon glyphicon-time pt-md-2'> */}
-                            {/* {this.state.post_content} */}
-                            
-                     {/* </div>  */}
-                     <ReactQuill
-                        value={currentpost.post_content.substring(0, 800)}
-                        readOnly={true}
-                        theme={"bubble"} className='glyphicon glyphicon-time pt-md-2'
-                        />
-                          <span className="pt-md-2 font-italic mr-3">
-                            <FontAwesomeIcon icon={faUser} /> By {currentpost.post_author}
-                          </span>
-                          <span className='glyphicon glyphicon-time pt-md-2'>
-                          <FontAwesomeIcon icon={faCalendarAlt} />&nbsp;
-                            {new Date(currentpost.post_date).getDate()}-{new Date(currentpost.post_date).getMonth()}-{new Date(currentpost.post_date).getFullYear()}
-                          </span>
-                          <Link to={`/post/${currentpost._id}`} className='text-danger'><h6>Read more{" >"}</h6></Link>
-                          
-                        {/* </div> */}
-                      
-                    {/* </a> */}
-                    </div>
-                    <hr />
-                </div>)
+            return (<div  key={currentpost.post_id}>
+                        <div className="row mb-5 py-3 rounded shadow-sm d-none d-sm-flex">
+                        <div className='col-md-8 py-2'>
+                                <h4 className="text-capitalize" style={{fontFamily: 'YellowTail'}}>
+                                    {currentpost.post_title}
+                                </h4>
+                                <ReactQuill
+                                value={currentpost.post_content.substring(0, 100)}
+                                readOnly={true}
+                                // style={{fontSize: 0.2 + 'vw'}}
+                                theme={"bubble"} className='glyphicon glyphicon-time pt-md-2'
+                                />
+                                {/* <hr className="d-none d-sm-block"/> */}
+                                <div className="row py-0">
+                                    <div className="col-md-8 col-8 py-0 my-0">
+                                        <span className="pt-md-2 font-italic my-0 h6 mr-1" style={{fontFamily: 'Tisa Sans Pro Bold'}}>
+                                            {/* <h6> */}
+                                                <FontAwesomeIcon icon={faUser} /> By {currentpost.post_author}
+                                            {/* </h6> */}
+                                        </span>
+                                        <span className='glyphicon glyphicon-time pt-md-2 h6 pl-2' style={{fontFamily: 'Tisa Sans Pro Bold'}}>
+                                            {/* <p className="h6"> */}
+                                                <FontAwesomeIcon icon={faCalendarAlt} />&nbsp;
+                                                {new Date(currentpost.post_date).getDate()}-{new Date(currentpost.post_date).getMonth()}-{new Date(currentpost.post_date).getFullYear()}
+                                            {/* </p> */}
+                                        </span>
+                                    </div>
+                                    <div className="col-md-4 col-4 px-md-3 pl-0">
+                                        <Link to={`/post/${currentpost._id}`} className='text-danger text-rigth ml-auto'>
+                                            <Button variant="primary" size="sm" className="text-right">
+                                                <h6 className="my-0">
+                                                    Read more...
+                                                </h6>
+                                            </Button>
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='col-md-4 pl-1 pr-0 my-auto'>
+                            <img width='' height='' className='img-responsive img-fluid rounded' alt={image} src={id} />
+                            </div>
+                            <hr />
+                        </div>
+                        <div class="col-12">
+                            <div className="card shadow mb-3 rounded d-block d-sm-none">
+                            <img className='img-responsive img-fluid rounded card-img-top' alt={image} src={id} />
+                                <div className="card-body">
+                                    <h5 className="card-title" style={{fontFamily: 'YellowTail'}}>{currentpost.post_title}</h5>
+                                    <p className="card-text">
+                                        <ReactQuill
+                                        value={currentpost.post_content.substring(0, 800)}
+                                        readOnly={true}
+                                        theme={"bubble"} className='glyphicon glyphicon-time pt-md-2'
+                                        />
+                                    </p>
+                                </div>
+                                <div className="card-footer px-2">
+                                    <div className="row py-0">
+                                        <div className="col-md-8 col-8 py-0 my-0">
+                                            <span className="pt-md-2 font-italic my-0 h6 mr-1" style={{fontFamily: 'Tisa Sans Pro Bold'}}>
+                                                {/* <h6> */}
+                                                    <FontAwesomeIcon icon={faUser} /> By {currentpost.post_author}
+                                                {/* </h6> */}
+                                            </span>
+                                            <span className='glyphicon glyphicon-time pt-md-2 h6 pl-1' style={{fontFamily: 'Tisa Sans Pro Bold'}}>
+                                                {/* <p className="h6"> */}
+                                                    <FontAwesomeIcon icon={faCalendarAlt} />&nbsp;
+                                                    {new Date(currentpost.post_date).getDate()}-{new Date(currentpost.post_date).getMonth()}-{new Date(currentpost.post_date).getFullYear()}
+                                                {/* </p> */}
+                                            </span>
+                                        </div>
+                                        <div className="col-md-4 col-4 px-md-3 pl-0">
+                                            <Link to={`/post/${currentpost._id}`} className='text-danger text-rigth ml-auto'>
+                                                <Button variant="outline-primary" size="sm" className="text-right">
+                                                    <h6 className="my-0">
+                                                        Read more...
+                                                    </h6>
+                                                </Button>
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>)
         }) }
         </div>
-        <div className="col-md-4 col-12">
-            <div className="shadow rounded p-2">
+        <div className="col-md-3 col-12 ml-auto">
+            <div className="shadow rounded p-2 mb-5">
                 <h2 className="text-center">Authors</h2>
                 {/* <div className=""></div> */}
                 {this.authors()}

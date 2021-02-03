@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
 import {Card} from 'react-bootstrap';
+import Category from '../category';
 // import Sidenav from './sidenav';
 // import Header from './header';
 // import Footer from './footer';
@@ -11,6 +12,8 @@ export default class Dashboard extends Component{
         super(props);
 
         this.state = {
+            user_cat: props.category,
+            name: props.name,
             posts: 0,
             comments: 34,
             categories: 0,
@@ -18,13 +21,23 @@ export default class Dashboard extends Component{
         }
     }
     componentDidMount(){
-        axios.get('/posts/')
+        if(this.state.user_cat === 'Admin'){
+            axios.get('/posts/')
         .then(response =>{
             this.setState({
                 posts: response.data.length
             });
         })
         .catch((error)=> console.log(error));
+        }else{
+            axios.get(`/posts/author/${this.state.name}`)
+        .then(response =>{
+            this.setState({
+                posts: response.data.length
+            });
+        })
+        .catch((error)=> console.log(error));
+        }
         axios.get('/users/')
         .then(response =>{
             this.setState({
@@ -122,7 +135,7 @@ export default class Dashboard extends Component{
                                     </div>
                                     <div className="col-md-5 text-right card-body">
                                         <div className="huge"><h1>{this.state.comments}</h1></div>
-                                        <div><h5>Posts</h5></div>
+                                        <div><h5>Comments</h5></div>
                                     </div>
                                 </div>
                             </div>

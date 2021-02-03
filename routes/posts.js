@@ -86,7 +86,8 @@ router.route('/author/:author').get((req, res)=>{
     Post.find({post_author: req.params.author})
     .then(posts=>{
         res.json(posts);
-        // console.log(posts);
+        console.log(posts);
+        console.log(req.params.author);
     })
     .catch(err => res.status(400).json('Error: '+ err))
 });

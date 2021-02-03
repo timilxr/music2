@@ -26,11 +26,14 @@ export default class ViewPost extends Component{
 
         this.deletePost = this.deletePost.bind(this);
 
-        this.state = { posts: [] };
+        this.state = { posts: [],
+        category: props.category,
+    name: props.name };
     }
 
     componentDidMount(){
-        axios.get('/posts/')
+        if(this.state.category === 'Admin'){
+            axios.get('/posts/')
         .then(response => {
             this.setState({
                 posts: response.data
@@ -40,6 +43,18 @@ export default class ViewPost extends Component{
             // alert(response.data);
         })
         .catch((error) => console.log(error));
+        } else {
+            axios.get(`/posts/author/${this.state.name}`)
+        .then(response => {
+            this.setState({
+                posts: response.data
+            });
+            console.log(this.props.mail);
+            console.log(this.state.posts[0]);
+            // alert(response.data);
+        })
+        .catch((error) => console.log(error));
+        }
     }
 
     deletePost(id){
@@ -108,6 +123,7 @@ export default class ViewPost extends Component{
         }) }
                     </tbody>
                 </Table>
+                <h2>{this.state.posts.length == 0? 'You don\'t have any posts yet, kindly upload new posts': ''}</h2>
             </div>
         )
     }

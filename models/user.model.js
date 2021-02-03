@@ -47,7 +47,7 @@ const userSchema = new Schema({
         timestamps: true,
 });
 
-userSchema.methods.generateHash = function (password) {
+userSchema.methods.generateHash = (password) => {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };
 

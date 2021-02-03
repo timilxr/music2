@@ -6,7 +6,6 @@ const commentSchema = new Schema({
     comment_email: {
         type: String,
         required: true,
-        unique: true,
         trim: true,
         minlength: 3
     }, 
