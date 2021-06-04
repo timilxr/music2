@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-// import { Link } from 'react-router-dom';
-import { Table } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { Table, Button } from 'react-bootstrap';
 
 // import {Link} from 'react-router-dom';
 
@@ -99,12 +99,12 @@ export default class AddCategory extends Component{
                             <td>{currentpost.category_id}</td>
                             <td>{currentpost.category}</td>
                             <td>
-                                {this.state.user_cat === 'Admin'? `<Link to={'/admin/Edit_post/'+currentpost._id}>
+                                {this.state.user_cat === 'Admin'? <Link to={'/admin/Edit_post/'+currentpost._id}>
                                     <Button variant="outline-primary">Edit</Button>{' '}
-                                </Link>`: ''}
+                                </Link>: ''}
                             </td>
                             <td>
-                                {this.state.user_cat === 'Admin'? `<Button variant="outline-danger" onClick={()=>{this.deletePost(currentpost._id)}}>Delete</Button>{' '}`: ''}
+                                {this.state.user_cat === 'Admin'? <Button variant="outline-danger" onClick={()=>{this.deletePost(currentpost._id)}}>Delete</Button>: ''}
                             </td>
                         </tr>
                 

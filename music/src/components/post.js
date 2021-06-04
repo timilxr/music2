@@ -178,30 +178,28 @@ export default class Post extends Component{
                 </div>
                </div>
                <div className="col-md-4 col-12">
-                   {this.exerciseList()}
-               {this.props.match.url}
+                   {/* {this.exerciseList()} */}
+               {/* {this.props.match.url} */}
                </div>
                <div className='mx-auto'>
                 <div id="carouselExampleSlidesOnly" className="carousel slide " data-ride="carousel">
                   <div className="carousel-inner">
                     <div className="carousel-item active">
-                    <h5 className='text-danger'>More Related Posts</h5>
-                                  {/* <img width='300' className='img-responsive img-fluid img-thumbnail' src={id} alt={post.post_title} /> */}
-                                  <div className="carousel-caption d-md-block">
-                                    <h5 className='text-danger'>More Related Posts</h5>
-                                    {/* <p>tdsytstg</p> */}
-                                    {/* <div dangerouslySetInnerHTML={{__html: post.post_content.substring(0, 100)}} className='glyphicon glyphicon-time pt-md-2 text-info'></div> */}
-                                  </div>
-                                </div>
+                      <h5 className='text-danger w-25 mx-auto bg-dark'>More Related Posts</h5>                                {/* <img width='300' className='img-responsive img-fluid img-thumbnail' src={id} alt={post.post_title} /> */}
+                      <div className="carousel-caption d-md-block">
+                        <h5 className='text-danger'>More Related Posts</h5>
+                        {/* <p>tdsytstg</p> */}
+                        {/* <div dangerouslySetInnerHTML={{__html: post.post_content.substring(0, 100)}} className='glyphicon glyphicon-time pt-md-2 text-info'></div> */}
+                      </div>
+                    </div>
                { this.state.posts.map(post => {
                  var image = post.post_image;
                  var id = `/${image}`;
                   // id  = require(`../../../images/${image}`);
                         return(
-                          // <div>
                             <div className="carousel-item" key={post.post_id}>
                                  
-                                  <img className='img-responsive img-fluid img-thumbnail' src={id} alt={post.post_title} />
+                                  <img className='img-responsive img-fluid d-block img-thumbnail mx-auto' src={id} alt={post.post_title} />
                                   <div className="carousel-caption d-md-block">
                                     <h5>{post.post_title}</h5>
                                     <p></p>
@@ -209,7 +207,7 @@ export default class Post extends Component{
                                   </div>
                                 </div>
                         )
-                    })} 
+                    })}   
                     <a className="carousel-control-prev" href="#carouselExampleSlidesOnly" role="button" data-slide="prev">
                       <span className="carousel-control-prev-icon" aria-hidden="true"></span>
                       <span className="sr-only">Previous</span>

@@ -206,7 +206,7 @@ export default class AddPost extends Component{
                     <label htmlFor="title"><h5>Post content</h5></label>
                     {/* <textarea name="post_content" className="form-control" id="" cols="30" rows="10" required value={this.state.post_content} onChange={this.onChangeContent}>
                     </textarea> */}
-                    <ReactQuill theme="snow"  modules={this.modules}
+                    <ReactQuill theme="snow" required modules={this.modules}
                     formats={this.formats}  onChange={this.rteChange}
                     value={this.state.richtext || ''}/>
                 </div>
