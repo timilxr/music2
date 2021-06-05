@@ -101,7 +101,7 @@ export default class Home extends Component{
 
                 <div className="container">
                     <div className="row justify-content-center mt-3">
-                        <form action="/action_page.php" className="row justify-content-center">
+                        <form action="#" className="row justify-content-center">
                         <h2>blog search</h2>
                         <input className="form-control f mx-2 mx-md-auto" type="text" placeholder="Search" /><br />
                         <input className="btn f" type="submit" value="Search" />
