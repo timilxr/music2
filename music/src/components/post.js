@@ -14,6 +14,7 @@ import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import 'react-quill/dist/quill.bubble.css';
+import Header from './header';
 // import { Button } from 'react-bootstrap';
 
 
@@ -117,20 +118,7 @@ export default class Post extends Component{
             //                 id  = require(`../images/${image}`);
         return(
           <div className='pt-4'>
-                <h1 className="mb-5 display-4 text-center text-info text-shadow font-weight-bolder" style={{ fontFamily: 'leelawadee UI', textShadow: `2px 2px 4px #000000` }}><Link to='/' className='text-decoration-none'>WeBlog</Link></h1>
-             <div>
-               <hr />
-             <ul className="nav nav-pills">
-                    { this.state.categories.map(cat => {
-                        return(
-                          <li className='nav-item m-auto' key={cat.category_id}>
-                            <Link to={`/category/${cat.category}`} className='text-info bg-light active text-sm-center nav-link m-auto'>{cat.category}</Link>
-                          </li>
-                        )
-                    })}
-                    </ul>
-                    <hr />
-                </div>
+            <Header path={this.props} />
         
             <div className="row">
                <div className="col-md-8 col-12">
