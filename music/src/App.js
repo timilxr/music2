@@ -5,10 +5,10 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Login from './components/admin/login';
-import Home from './components/home';
+import Home from './pages/home';
 import Post from './components/post';
-import Category from './components/category';
-import Author from './components/author';
+import Category from './pages/category';
+import Author from './pages/author';
 import About from './components/about';
 // import SideNav from './components/sidenav';
 // import AddPost from './components/add_post';
@@ -16,7 +16,7 @@ import About from './components/about';
 function App() {
   return (
     <Router className="container-fluid">
-    <div className='container-fluid'>
+    {/* <div className='container-fluid'> */}
     {/* <Redirect to="/home" /> */}
     <Switch>
       <Route path='/admin' component={Login} />
@@ -46,7 +46,7 @@ function App() {
                     </div>
             
                 </div>
-    </div>
+    {/* </div> */}
     </Router>
   );
 }
