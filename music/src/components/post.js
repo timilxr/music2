@@ -15,6 +15,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import 'react-quill/dist/quill.bubble.css';
 import Header from './header';
+import Authors from './authors';
 // import { Button } from 'react-bootstrap';
 
 
@@ -117,10 +118,10 @@ export default class Post extends Component{
             //                 var id = 'make' +this.state.post_id 
             //                 id  = require(`../images/${image}`);
         return(
-          <div className='pt-4'>
+          <div className='pt-0'>
             <Header path={this.props} />
-        
-            <div className="row">
+            <div className="mx-md-5">
+              <div className="row pt-5 mt-5">
                <div className="col-md-8 col-12">
                    
                <div className="p-2 p-md-4" key={this.state.post_id}>
@@ -165,11 +166,18 @@ export default class Post extends Component{
                     <hr />
                 </div>
                </div>
-               <div className="col-md-4 col-12">
+               <div className="col-md-3 col-12 ml-md-auto mt-md-5 pt-md-5">
                    {/* {this.exerciseList()} */}
+                   <div className="shadow rounded p-2 mb-5 mt-md-5">
+                            <h2 className="text-center">Authors</h2>
+                            <Authors />
+                        </div>
+                        <div className="shadow rounded p-2">
+                            <h2 className="text-center my-3">Tags</h2>
+                        </div>
                {/* {this.props.match.url} */}
                </div>
-               <div className='mx-auto'>
+               <div className='mx-auto w-100 mt-5 mt-md-0'>
                 <div id="carouselExampleSlidesOnly" className="carousel slide " data-ride="carousel">
                   <div className="carousel-inner">
                     <div className="carousel-item active">
@@ -207,6 +215,7 @@ export default class Post extends Component{
                   </div>
                 </div>
                </div> 
+            </div>
             </div>
           </div>
         )
